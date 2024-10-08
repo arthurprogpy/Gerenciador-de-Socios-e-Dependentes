@@ -73,9 +73,13 @@ begin
               ShowMessage('Senha Incorreta !');
             end
           else
-            fLogin.Hide;
             usuario := edt_usuario.text;
-            FMenu.show;
+            if fMenu = nil then
+              begin
+                Application.CreateForm(TfMenu, fMenu);
+              end;
+            fMenu.Show;
+            fLogin.Hide;
           end;
         end;
      end;

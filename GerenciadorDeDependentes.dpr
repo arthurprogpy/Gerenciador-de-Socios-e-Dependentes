@@ -12,6 +12,5 @@ begin
   Application.Initialize;
   Application.CreateForm(TfLogin, fLogin);
   Application.CreateForm(TfDataModule, fDataModule);
-  Application.CreateForm(TfMenu, fMenu);
   Application.Run;
 end.
