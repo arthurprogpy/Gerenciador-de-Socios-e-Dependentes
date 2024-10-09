@@ -222,6 +222,7 @@ end;
 
 procedure TFOperadores.btn_localizarClick(Sender: TObject);
 begin
+  chave := '';
   sql_pesquisa := 'SELECT * FROM OPERADORES';
   FPesquisa.ShowModal;
   if chave <> '' then

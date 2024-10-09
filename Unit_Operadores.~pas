@@ -192,17 +192,19 @@ begin
           try
             adoquery_operadores.SQL.Text := 'UPDATE OPERADORES SET USUARIO = ' +
                                             QuotedStr(edt_usuario.Text) +','+
-                                            'NOME = ' QuotedStr(edt_nome.Text) +','+
-                                            'SENHA = ' QuotedStr(edt_senha.Text)+
-                                            'WHERE ID = ' +PK;
+                                            'NOME = '+ QuotedStr(edt_nome.Text) +','+
+                                            'SENHA = ' +QuotedStr(edt_senha.Text)+
+                                            ' WHERE ID = ' +PK;
 
           adoquery_operadores.ExecSQL;
            fDataModule.conexaoDB.CommitTrans;
-
+           bloqueia_campos;
+          bloqueia_salvar(Sender);
           except
           on E : exception do
             ShowMessage('Erro: ' + E.message);
           end;
+
          end;
       end;   
   end;

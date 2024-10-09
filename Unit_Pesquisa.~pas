@@ -53,6 +53,7 @@ begin
     begin
       chave := adoquery_pesquisa.Fields[0].AsString;
       adoquery_pesquisa.Close;
+      FPesquisa.Close;
     end;
 end;
 

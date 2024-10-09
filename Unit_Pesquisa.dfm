@@ -70,6 +70,7 @@ object FPesquisa: TFPesquisa
     Height = 25
     Caption = 'Fechar'
     TabOrder = 4
+    OnClick = btn_fecharClick
   end
   object DSPesquisa: TDataSource
     DataSet = adoquery_pesquisa

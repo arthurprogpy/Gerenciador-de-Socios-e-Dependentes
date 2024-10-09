@@ -19,6 +19,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure btn_selecionarClick(Sender: TObject);
     procedure btn_pesquisarClick(Sender: TObject);
+    procedure btn_fecharClick(Sender: TObject);
 
 
   private
@@ -54,6 +55,7 @@ begin
       chave := adoquery_pesquisa.Fields[0].AsString;
       adoquery_pesquisa.Close;
       FPesquisa.Close;
+      edt_pesquisa.Clear;
     end;
 end;
 
@@ -63,6 +65,14 @@ begin
                                               QuotedStr(edt_pesquisa.text+'%');
 
   adoquery_pesquisa.Open;
+end;
+
+procedure TFPesquisa.btn_fecharClick(Sender: TObject);
+begin
+  close;
+  edt_pesquisa.clear;
+  adoquery_pesquisa.Close;
+  chave := '';
 end;
 
 end.
