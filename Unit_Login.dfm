@@ -1,6 +1,6 @@
 object fLogin: TfLogin
-  Left = 519
-  Top = 250
+  Left = 499
+  Top = 192
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Login'
@@ -14,7 +14,6 @@ object fLogin: TfLogin
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -65,6 +64,15 @@ object fLogin: TfLogin
     TabOrder = 3
     OnClick = btn_sairClick
     Kind = bkCancel
+  end
+  object BitBtn1: TBitBtn
+    Left = 48
+    Top = 16
+    Width = 75
+    Height = 25
+    Caption = 'BitBtn1'
+    TabOrder = 4
+    OnClick = BitBtn1Click
   end
   object adoquery_login: TADOQuery
     Connection = fDataModule.conexaoDB

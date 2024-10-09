@@ -12,5 +12,12 @@ begin
   Application.Initialize;
   Application.CreateForm(TfLogin, fLogin);
   Application.CreateForm(TfDataModule, fDataModule);
+
+  if fLogin.autenticacao = false then
+    begin
+      Application.Terminate;
+    end;
+    
   Application.Run;
+
 end.
