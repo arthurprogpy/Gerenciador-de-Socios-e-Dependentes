@@ -23,6 +23,7 @@ type
     procedure BitBtn1Click(Sender: TObject);
     function validacao(usuario, senha: string) :boolean;
     function autenticacao :boolean;
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     senha : String;
@@ -113,6 +114,10 @@ begin
         else
           begin
             usuario := adoquery_login.fieldbyname('usuario').AsString;
+            if fMenu = nil  then
+              begin
+                Application.CreateForm(TfMenu, fMenu);
+              end;
             fMenu.Show;
             fLogin.Hide;
             Result := true;
@@ -132,6 +137,11 @@ begin
      ShowMessage('Não foi possivel se conectar ao banco !');
      result := false;
   end;
+end;
+
+procedure TfLogin.FormShow(Sender: TObject);
+begin
+  autenticacao;
 end;
 
 end.
