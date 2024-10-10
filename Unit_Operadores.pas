@@ -22,7 +22,6 @@ type
     Senha: TLabel;
     btn_salvar: TBitBtn;
     adoquery_operadores: TADOQuery;
-    btn_localizar: TBitBtn;
     procedure bloqueia_campos;
     procedure libera_campos;
     procedure limpa_campos;
@@ -52,9 +51,6 @@ uses Unit_dataModule, Unit_Login, Unit_Pesquisa;
 
 {$R *.dfm}
 
-{ TFOperadores }
-
-{ TFOperadores }
 
 procedure TFOperadores.bloqueia_campos;
 var i: integer;
@@ -150,6 +146,7 @@ procedure TFOperadores.btn_novoClick(Sender: TObject);
 begin
   libera_salvar(Sender);
   libera_campos;
+  limpa_campos;
 end;
 
 procedure TFOperadores.btn_cancelarClick(Sender: TObject);
@@ -194,7 +191,7 @@ begin
                                             QuotedStr(edt_usuario.Text) +','+
                                             'NOME = '+ QuotedStr(edt_nome.Text) +','+
                                             'SENHA = ' +QuotedStr(edt_senha.Text)+
-                                            ' WHERE ID = ' +PK;
+                                            ' WHERE ID = ' +id;
 
           adoquery_operadores.ExecSQL;
            fDataModule.conexaoDB.CommitTrans;
@@ -211,13 +208,16 @@ begin
 
 procedure TFOperadores.btn_editarClick(Sender: TObject);
 begin
-  if Pk = '' then
-    ShowMessage('Impossivel Editar')
-  else
-    begin
-      libera_campos;
-      libera_salvar(Sender);
-    end;
+  adoquery_operadores.SQL.Text := 'SELECT * FROM OPERADORES WHERE ID = :ID';
+  adoquery_operadores.Parameters.ParamByName('id').Value := id;
+  adoquery_operadores.Open;
+
+  edt_nome.Text := adoquery_operadores.FieldByName('NOME').AsString;
+  edt_senha.Text := adoquery_operadores.FieldByName('senha').AsString;
+  edt_usuario.Text := adoquery_operadores.FieldByName('usuario').AsString;
+
+  libera_campos;
+  libera_salvar(Sender);
 end;
 
 procedure TFOperadores.btn_localizarClick(Sender: TObject);

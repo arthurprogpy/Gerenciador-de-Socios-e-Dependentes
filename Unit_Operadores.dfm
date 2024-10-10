@@ -1,6 +1,6 @@
 object FOperadores: TFOperadores
-  Left = 585
-  Top = 255
+  Left = 637
+  Top = 178
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Operadores'
@@ -118,19 +118,10 @@ object FOperadores: TFOperadores
     Height = 21
     TabOrder = 3
   end
-  object btn_localizar: TBitBtn
-    Left = 256
-    Top = 32
-    Width = 75
-    Height = 25
-    Caption = 'Localizar'
-    TabOrder = 4
-    OnClick = btn_localizarClick
-  end
   object adoquery_operadores: TADOQuery
     Connection = fDataModule.conexaoDB
     Parameters = <>
-    Left = 376
-    Top = 16
+    Left = 368
+    Top = 8
   end
 end

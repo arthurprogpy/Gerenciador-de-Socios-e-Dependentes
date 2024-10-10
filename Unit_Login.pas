@@ -23,6 +23,7 @@ type
     procedure BitBtn1Click(Sender: TObject);
     function validacao(usuario, senha: string) :boolean;
     function autenticacao :boolean;
+    function formata_valor(valor, destino: String) : String;
   private
     { Private declarations }
     senha : String;
@@ -32,7 +33,7 @@ type
 
 var
   fLogin: TfLogin;
-  usuario: String;
+  usuario, ID: String;
 implementation
 
 uses Unit_dataModule, Unit_Menu;
@@ -113,6 +114,7 @@ begin
         else
           begin
             usuario := adoquery_login.fieldbyname('usuario').AsString;
+            id := adoquery_login.fieldbyname('ID').AsString;
             if fMenu = nil  then
               begin
                 Application.CreateForm(TfMenu, fMenu);
@@ -136,6 +138,42 @@ begin
      ShowMessage('Não foi possivel se conectar ao banco !');
      result := false;
   end;
+end;
+
+function TfLogin.formata_valor(valor, destino: String): String;
+var
+valor_formatado: String;
+i: integer;
+begin
+  if (valor = '') or (destino = '') then
+    begin
+      Result := '';
+      exit;
+    end;
+    valor_formatado := valor;
+    Delete(valor_formatado, pos('R', valor_formatado), 1);
+    Delete(valor_formatado, pos('$', valor_formatado), 1);
+    Delete(valor_formatado, pos('.', valor_formatado), 1);
+
+    valor_formatado := Trim(valor_formatado);
+
+    if destino = 'T' then
+    begin
+      Result := FormatCurr('R$ #, ##0.00', StrToCurr(valor_formatado))
+    end
+    else if destino = 'E' then
+      begin
+        Result := valor_formatado
+      end
+    else if destino = 'B' then
+      begin
+        for i := 1 to length(valor_formatado) do
+          begin
+            if valor_formatado[i] = ',' then
+              valor_formatado[i] := '.';
+          end;
+          Result := valor_formatado;
+      end
 end;
 
 end.

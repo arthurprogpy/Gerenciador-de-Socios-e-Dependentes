@@ -36,6 +36,7 @@ object fLogin: TfLogin
     Width = 209
     Height = 21
     TabOrder = 0
+    Text = 'adm'
   end
   object edt_senha: TEdit
     Left = 96
@@ -43,6 +44,7 @@ object fLogin: TfLogin
     Width = 209
     Height = 21
     TabOrder = 1
+    Text = '123'
   end
   object btn_entrar: TBitBtn
     Left = 240
