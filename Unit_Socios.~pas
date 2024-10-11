@@ -27,6 +27,7 @@ type
     btn_pesquisa: TBitBtn;
     edt_pesquisa: TMaskEdit;
     RdInativo: TRadioButton;
+    btn_limmpar: TBitBtn;
     procedure limpa_campos;
     procedure bloqueia_campos;
     procedure bloqueia_salvar(Sender : TObject);
@@ -40,6 +41,8 @@ type
     procedure Grid_sociosCellClick(Column: TColumn);
     function formata_valor(valor, destino: String): String;
     procedure btn_pesquisaClick(Sender: TObject);
+    procedure btn_limmparClick(Sender: TObject);
+    procedure btn_cancelarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -302,7 +305,25 @@ begin
   if edt_pesquisa.Text = '' then
     ShowMessage('Impossivel Pesquisar !')
   else
-    adoquery_socios.SQL.Text := 'SELECT * FROM SOCIOS WHERE NOME LIKE ' + edt_pesquisa.Text+'%';
+    adoquery_socios.SQL.Text := 'SELECT * FROM SOCIOS WHERE NOME LIKE ' + QuotedStr(edt_pesquisa.Text+'%');
+    adoquery_socios.Close;
+    adoquery_socios.Open;
+end;
+
+procedure TFSocios.btn_limmparClick(Sender: TObject);
+begin
+  edt_pesquisa.Clear;
+  adoquery_socios.SQL.Text := 'SELECT ID, NOME, ATIVO, RENDA FROM SOCIOS';
+  adoquery_socios.close;
+  adoquery_socios.Open;
+end;
+
+procedure TFSocios.btn_cancelarClick(Sender: TObject);
+begin
+  bloqueia_campos;
+  bloqueia_salvar(Sender);
+  limpa_campos;
+  chave := '';
 end;
 
 end.

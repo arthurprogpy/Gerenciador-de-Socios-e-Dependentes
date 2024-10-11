@@ -33,7 +33,6 @@ type
     procedure btn_cancelarClick(Sender: TObject);
     procedure btn_salvarClick(Sender: TObject);
     procedure btn_editarClick(Sender: TObject);
-    procedure btn_localizarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -218,27 +217,6 @@ begin
 
   libera_campos;
   libera_salvar(Sender);
-end;
-
-procedure TFOperadores.btn_localizarClick(Sender: TObject);
-begin
-  chave := '';
-  sql_pesquisa := 'SELECT * FROM OPERADORES';
-  FPesquisa.ShowModal;
-  if chave <> '' then
-    Pk := chave;
-    adoquery_operadores.SQL.Text := 'SELECT * FROM OPERADORES WHERE ID = ' +
-                                    Pk;
-
-    adoquery_operadores.open;
-    edt_usuario.text := adoquery_operadores.fieldbyname('USUARIO').AsString;
-    edt_nome.text := adoquery_operadores.fieldbyname('NOME').AsString;
-    edt_senha.text := adoquery_operadores.fieldbyname('SENHA').AsString;
-    adoquery_operadores.close;
-    bloqueia_salvar(Sender);
-
-
-
 end;
 
 end.

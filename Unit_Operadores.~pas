@@ -51,9 +51,6 @@ uses Unit_dataModule, Unit_Login, Unit_Pesquisa;
 
 {$R *.dfm}
 
-{ TFOperadores }
-
-{ TFOperadores }
 
 procedure TFOperadores.bloqueia_campos;
 var i: integer;

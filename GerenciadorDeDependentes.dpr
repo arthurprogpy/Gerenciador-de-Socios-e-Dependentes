@@ -8,7 +8,7 @@ uses
   Unit_Socios in 'Unit_Socios.pas' {FSocios},
   Unit_Operadores in 'Unit_Operadores.pas' {FOperadores},
   Unit_Pesquisa in 'Unit_Pesquisa.pas' {FPesquisa},
-  Unit_Dependentes in 'Unit_Dependentes.pas' {Form1};
+  Unit_Dependentes in 'Unit_Dependentes.pas' {fDependentes};
 
 {$R *.res}
 
@@ -19,7 +19,7 @@ begin
   Application.CreateForm(TFSocios, FSocios);
   Application.CreateForm(TFOperadores, FOperadores);
   Application.CreateForm(TFPesquisa, FPesquisa);
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TfDependentes, fDependentes);
   if fLogin.autenticacao = false then
     begin
       Application.Terminate;

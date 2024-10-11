@@ -16,6 +16,7 @@ type
     procedure btn_fecharClick(Sender: TObject);
     procedure btn_sociosClick(Sender: TObject);
     procedure btn_operadoresClick(Sender: TObject);
+    procedure btn_dependentesClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -27,7 +28,7 @@ var
 
 implementation
 
-uses Unit_Socios, Unit_Operadores;
+uses Unit_Socios, Unit_Operadores, Unit_Dependentes;
 
 {$R *.dfm}
 
@@ -44,6 +45,13 @@ end;
 procedure TfMenu.btn_operadoresClick(Sender: TObject);
 begin
   FOperadores.ShowModal;
+end;
+
+procedure TfMenu.btn_dependentesClick(Sender: TObject);
+begin
+   if fDependentes = nil then
+    Application.CreateForm(TfDependentes, fDependentes);
+    fDependentes.ShowModal;
 end;
 
 end.
