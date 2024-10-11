@@ -141,9 +141,9 @@ begin
 end;
 
 function TfLogin.formata_valor(valor, destino: String): String;
-  var
-  valor_formatado: String;
-  i: integer;
+var
+valor_formatado: String;
+i: integer;
 begin
   if (valor = '') or (destino = '') then
     begin

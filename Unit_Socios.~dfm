@@ -134,6 +134,7 @@ object FSocios: TFSocios
     Height = 25
     Caption = 'Pesquisar'
     TabOrder = 4
+    OnClick = btn_pesquisaClick
   end
   object edt_pesquisa: TMaskEdit
     Left = 16

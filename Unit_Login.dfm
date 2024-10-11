@@ -67,15 +67,6 @@ object fLogin: TfLogin
     OnClick = btn_sairClick
     Kind = bkCancel
   end
-  object BitBtn1: TBitBtn
-    Left = 48
-    Top = 16
-    Width = 75
-    Height = 25
-    Caption = 'BitBtn1'
-    TabOrder = 4
-    OnClick = BitBtn1Click
-  end
   object adoquery_login: TADOQuery
     Connection = fDataModule.conexaoDB
     Parameters = <>

@@ -84,6 +84,7 @@ object FSocios: TFSocios
       Height = 25
       Caption = 'Cancelar'
       TabOrder = 2
+      OnClick = btn_cancelarClick
     end
     object btn_excluir: TBitBtn
       Left = 280
@@ -128,17 +129,18 @@ object FSocios: TFSocios
     OnCellClick = Grid_sociosCellClick
   end
   object btn_pesquisa: TBitBtn
-    Left = 544
+    Left = 472
     Top = 16
     Width = 75
     Height = 25
     Caption = 'Pesquisar'
     TabOrder = 4
+    OnClick = btn_pesquisaClick
   end
   object edt_pesquisa: TMaskEdit
     Left = 16
     Top = 24
-    Width = 521
+    Width = 449
     Height = 21
     TabOrder = 5
   end
@@ -149,6 +151,15 @@ object FSocios: TFSocios
     Height = 17
     Caption = 'Socio Inativo'
     TabOrder = 6
+  end
+  object btn_limmpar: TBitBtn
+    Left = 552
+    Top = 16
+    Width = 75
+    Height = 25
+    Caption = 'Limpar'
+    TabOrder = 7
+    OnClick = btn_limmparClick
   end
   object adoquery_socios: TADOQuery
     Connection = fDataModule.conexaoDB
