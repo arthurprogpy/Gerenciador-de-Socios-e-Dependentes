@@ -15,7 +15,6 @@ type
     btn_entrar: TBitBtn;
     btn_sair: TBitBtn;
     adoquery_login: TADOQuery;
-    BitBtn1: TBitBtn;
     procedure btn_sairClick(Sender: TObject);
     procedure btn_entrarClick(Sender: TObject);
     function descriptografa (texto :String) :String;

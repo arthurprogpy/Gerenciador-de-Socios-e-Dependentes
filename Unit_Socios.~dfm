@@ -1,6 +1,6 @@
 object FSocios: TFSocios
-  Left = 64
-  Top = 133
+  Left = 669
+  Top = 184
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Socios'
@@ -93,6 +93,7 @@ object FSocios: TFSocios
       Height = 25
       Caption = 'Excluir'
       TabOrder = 3
+      OnClick = btn_excluirClick
     end
     object btn_fechar: TBitBtn
       Left = 352
@@ -144,22 +145,22 @@ object FSocios: TFSocios
     Height = 21
     TabOrder = 5
   end
-  object RdInativo: TRadioButton
-    Left = 544
-    Top = 312
-    Width = 113
-    Height = 17
-    Caption = 'Socio Inativo'
-    TabOrder = 6
-  end
   object btn_limmpar: TBitBtn
     Left = 552
     Top = 16
     Width = 75
     Height = 25
     Caption = 'Limpar'
-    TabOrder = 7
+    TabOrder = 6
     OnClick = btn_limmparClick
+  end
+  object RdInativo: TCheckBox
+    Left = 544
+    Top = 312
+    Width = 97
+    Height = 17
+    Caption = 'Socio Inativo'
+    TabOrder = 7
   end
   object adoquery_socios: TADOQuery
     Connection = fDataModule.conexaoDB

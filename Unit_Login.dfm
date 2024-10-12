@@ -1,6 +1,6 @@
 object fLogin: TfLogin
-  Left = 499
-  Top = 192
+  Left = 466
+  Top = 203
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Login'
@@ -43,6 +43,7 @@ object fLogin: TfLogin
     Top = 104
     Width = 209
     Height = 21
+    PasswordChar = '*'
     TabOrder = 1
     Text = '123'
   end

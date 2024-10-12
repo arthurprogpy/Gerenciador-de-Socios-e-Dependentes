@@ -26,8 +26,8 @@ type
     Label3: TLabel;
     btn_pesquisa: TBitBtn;
     edt_pesquisa: TMaskEdit;
-    RdInativo: TRadioButton;
     btn_limmpar: TBitBtn;
+    RdInativo: TCheckBox;
     procedure limpa_campos;
     procedure bloqueia_campos;
     procedure bloqueia_salvar(Sender : TObject);
@@ -43,6 +43,7 @@ type
     procedure btn_pesquisaClick(Sender: TObject);
     procedure btn_limmparClick(Sender: TObject);
     procedure btn_cancelarClick(Sender: TObject);
+    procedure btn_excluirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -53,6 +54,7 @@ var
   FSocios: TFSocios;
   valorMonetario: currency;
   valorConvertido, chave, nome, renda, atividade: string;
+  resposta: Integer;
 
 implementation
 
@@ -69,6 +71,7 @@ begin
         begin
           (FSocios.Components[i] as TEdit).Enabled := false;
           (FSocios.Components[i] as TEdit).color := clinfobk;
+          RdInativo.Enabled := false;
         end;
     end;
 end;
@@ -102,6 +105,7 @@ begin
         begin
           (FSocios.Components[i] as TEdit).Enabled := true;
           (FSocios.Components[i] as TEdit).color := clwhite;
+          RdInativo.Enabled := true;
         end;
     end;
 end;
@@ -177,36 +181,48 @@ begin
           valorConvertido := formata_valor(edt_renda.Text, 'T');
           edt_renda.text := valorConvertido;
 
-          adoquery_aux.SQL.Text := 'INSERT INTO SOCIOS VALUES('+
-                                    QuotedStr(edt_nome.text)+
-                                    ', :ativo,' +
-                                    QuotedStr(valorConvertido)+ ')';
+          if StrToFloat(valorConvertido) < 0 then
+          begin
+            ShowMessage('Impossivel Adicionar valores negativos');
+            limpa_campos;
+          end
+          else
+            begin
+              adoquery_aux.SQL.Text := 'INSERT INTO SOCIOS VALUES('+
+                                        QuotedStr(edt_nome.text)+
+                                        ', :ativo,' +
+                                        QuotedStr(valorConvertido)+ ')';
 
-            if RdInativo.Checked = false then
-              adoquery_aux.Parameters.ParamByName('ativo').Value := 'ATIVO'
-            else
-              begin
-                adoquery_aux.Parameters.ParamByName('ativo').Value := 'INATIVO'
-              end;
-      try
-        adoquery_aux.ExecSQL;
-        fDataModule.conexaoDB.CommitTrans;
-        ShowMessage('Usuario Inserido com Sucesso !');
-        adoquery_socios.Close;;
-        adoquery_socios.open;
-        limpa_campos;
-        bloqueia_salvar(Sender);
-        bloqueia_campos;
-      except
-      on E : exception do
-        ShowMessage('Erro ao inserir: '+ E.message);
+              if RdInativo.Checked = false then
+                adoquery_aux.Parameters.ParamByName('ativo').Value := 'ATIVO'
+              else
+                begin
+                  adoquery_aux.Parameters.ParamByName('ativo').Value := 'INATIVO'
+                end;
+        try
+          adoquery_aux.ExecSQL;
+          fDataModule.conexaoDB.CommitTrans;
+          ShowMessage('Usuario Inserido com Sucesso !');
+          adoquery_socios.Close;;
+          adoquery_socios.open;
+          limpa_campos;
+          bloqueia_salvar(Sender);
+          bloqueia_campos;
+        except
+        on E : exception do
+          ShowMessage('Erro ao inserir: '+ E.message);
+        end;
       end;
-      end;
+  end;
   end
     else if operacao = 'editar' then
       begin
         if chave = '' then
           ShowMessage('Impossivel Alterar')
+        else if Length(edt_nome.Text) <= 4 then
+          begin
+            ShowMessage('Insira Pelo Menos 4 caracteres no campo nome !');
+          end
         else
           begin
             fDataModule.conexaoDB.BeginTrans;
@@ -223,29 +239,37 @@ begin
 
             valorConvertido := formata_valor(edt_renda.Text, 'T');
 
-            adoquery_aux.SQL.Text := 'UPDATE SOCIOS SET ' +
-                                    ' NOME = ' + QuotedStr(edt_nome.Text)+ ','+
-                                    ' ATIVO = ' + atividade + ','+
-                                    ' RENDA =  '+ valorConvertido +
-                                    ' WHERE ID = ' + chave;
+            if StrToFloat(valorConvertido) < 0 then
+            begin
+              ShowMessage('Impossivel Adicionar valores negativos !');
+              limpa_campos;
+            end
+            else
+              begin
+                adoquery_aux.SQL.Text := 'UPDATE SOCIOS SET ' +
+                                        ' NOME = ' + QuotedStr(edt_nome.Text)+ ','+
+                                        ' ATIVO = ' + atividade + ','+
+                                        ' RENDA =  '+ valorConvertido +
+                                        ' WHERE ID = ' + chave;
 
-            ShowMessage(adoquery_aux.SQL.Text);
-            try
-            adoquery_aux.ExecSQL;
-            fDataModule.conexaoDB.CommitTrans;
-            ShowMessage('Informações alteradas !');
+                ShowMessage(adoquery_aux.SQL.Text);
+                try
+                adoquery_aux.ExecSQL;
+                fDataModule.conexaoDB.CommitTrans;
+                ShowMessage('Informações alteradas !');
 
-            adoquery_socios.close;
-            adoquery_socios.Open;
-            except
-            on E: exception do
-              ShowMessage('Erro: ' + E.Message);
-            end;
+                adoquery_socios.close;
+                adoquery_socios.Open;
+                except
+                on E: exception do
+                  ShowMessage('Erro: ' + E.Message);
+                end;
+              end;
+                bloqueia_salvar(Sender);
+                bloqueia_campos;
           end;
-             bloqueia_salvar(Sender);
-            bloqueia_campos;
-      end;
-  end;
+    end;
+end;
 procedure TFSocios.btn_editarClick(Sender: TObject);
 begin
   if chave <> '' then
@@ -267,13 +291,15 @@ begin
   chave := adoquery_socios.Fields.Fields[0].AsString;
 
   if adoquery_socios.fieldbyname('ativo').AsString = 'ATIVO' then
-    RdInativo.checked := false
+    begin
+      RdInativo.checked := false
+    end
   else
     begin
      RdInativo.checked := true;
     end;
-
   bloqueia_campos;
+
 end;
 
 function TfSocios.formata_valor(valor, destino: String): String;
@@ -324,6 +350,26 @@ begin
   bloqueia_salvar(Sender);
   limpa_campos;
   chave := '';
+end;
+
+procedure TFSocios.btn_excluirClick(Sender: TObject);
+begin
+  if chave = '' then
+    ShowMessage('Impossivel Selecionar')
+  else
+    begin
+      resposta := MessageDlg('Caso você exclua um socio você automaticamente'+
+                    'remove todos os dependentes atrelados a ele.'+
+                     'Tem certeza que deseja excluir ?', mtConfirmation, [mbYes, mbCancel],0);
+
+      if resposta = mRyes then
+        begin
+          adoquery_aux.SQL.text := 'DELETE FROM DEPENDENTES WHERE ID_SOCIO = '+chave;
+          adoquery_aux.ExecSQL;
+          adoquery_aux.SQL.text := 'DELETE FROM SOCIOS WHERE ID = '+chave;
+          adoquery_aux.ExecSQL;
+        end;
+    end;
 end;
 
 end.
