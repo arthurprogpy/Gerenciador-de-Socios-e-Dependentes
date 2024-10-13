@@ -28,6 +28,7 @@ type
     edt_pesquisa: TMaskEdit;
     btn_limmpar: TBitBtn;
     RdInativo: TCheckBox;
+    RdStatus: TRadioGroup;
     procedure limpa_campos;
     procedure bloqueia_campos;
     procedure bloqueia_salvar(Sender : TObject);
@@ -303,7 +304,11 @@ begin
      RdInativo.checked := true;
     end;
   bloqueia_campos;
-
+  btn_novo.Enabled := true;
+  btn_salvar.Enabled := false;
+  btn_editar.Enabled := true;
+  btn_cancelar.Enabled := false;
+  btn_excluir.Enabled := true;
 end;
 
 function TfSocios.formata_valor(valor, destino: String): String;
@@ -335,9 +340,21 @@ begin
   if edt_pesquisa.Text = '' then
     ShowMessage('Impossivel Pesquisar !')
   else
-    adoquery_socios.SQL.Text := 'SELECT * FROM SOCIOS WHERE NOME LIKE ' + QuotedStr(edt_pesquisa.Text+'%');
-    adoquery_socios.Close;
-    adoquery_socios.Open;
+  if RdStatus.ItemIndex = 0 then
+     adoquery_socios.SQL.Text := 'SELECT * FROM SOCIOS WHERE NOME LIKE ' + QuotedStr(edt_pesquisa.Text+'%') +
+                                  'AND ATIVO = '+QuotedStr('ATIVO')
+  else if RdStatus.ItemIndex = 1 then
+  begin
+         adoquery_socios.SQL.Text := 'SELECT * FROM SOCIOS WHERE NOME LIKE ' + QuotedStr(edt_pesquisa.Text+'%') +
+                                  'AND ATIVO = '+QuotedStr('INATIVO')
+  end
+  else
+  begin
+    adoquery_socios.SQL.Text := 'SELECT * FROM SOCIOS WHERE NOME LIKE ' +
+                                QuotedStr(edt_pesquisa.Text+'%');
+  end;
+  adoquery_socios.Close;
+  adoquery_socios.Open;
 end;
 
 procedure TFSocios.btn_limmparClick(Sender: TObject);
@@ -346,6 +363,7 @@ begin
   adoquery_socios.SQL.Text := 'SELECT ID, NOME, ATIVO, RENDA FROM SOCIOS';
   adoquery_socios.close;
   adoquery_socios.Open;
+  RdStatus.ItemIndex := 0;
 end;
 
 procedure TFSocios.btn_cancelarClick(Sender: TObject);
@@ -369,11 +387,24 @@ begin
       if resposta = mRyes then
         begin
           adoquery_aux.SQL.text := 'DELETE FROM DEPENDENTES WHERE ID_SOCIO = '+chave;
+          try
           adoquery_aux.ExecSQL;
+          except
+          on E : exception do
+            ShowMessage('Erro: '+E.Message);
+          end;
           adoquery_aux.SQL.text := 'DELETE FROM SOCIOS WHERE ID = '+chave;
+          try
           adoquery_aux.ExecSQL;
+          except
+          on E : exception do
+            ShowMessage('Erro: '+E.Message);
+          end;
+          adoquery_socios.Close;
+          adoquery_socios.Open;
+          end;
         end;
     end;
-end;
+
 
 end.

@@ -1,11 +1,11 @@
 object FSocios: TFSocios
-  Left = 669
-  Top = 184
+  Left = 389
+  Top = 145
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Socios'
   ClientHeight = 408
-  ClientWidth = 683
+  ClientWidth = 729
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -117,7 +117,7 @@ object FSocios: TFSocios
   object Grid_socios: TDBGrid
     Left = 16
     Top = 56
-    Width = 649
+    Width = 705
     Height = 233
     DataSource = DsSocios
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
@@ -130,7 +130,7 @@ object FSocios: TFSocios
     OnCellClick = Grid_sociosCellClick
   end
   object btn_pesquisa: TBitBtn
-    Left = 472
+    Left = 536
     Top = 16
     Width = 75
     Height = 25
@@ -141,12 +141,12 @@ object FSocios: TFSocios
   object edt_pesquisa: TMaskEdit
     Left = 16
     Top = 24
-    Width = 449
+    Width = 425
     Height = 21
     TabOrder = 5
   end
   object btn_limmpar: TBitBtn
-    Left = 552
+    Left = 608
     Top = 16
     Width = 75
     Height = 25
@@ -162,17 +162,29 @@ object FSocios: TFSocios
     Caption = 'Socio Inativo'
     TabOrder = 7
   end
+  object RdStatus: TRadioGroup
+    Left = 448
+    Top = 8
+    Width = 81
+    Height = 41
+    Caption = 'Status'
+    ItemIndex = 0
+    Items.Strings = (
+      'Ativo'
+      'Inativo')
+    TabOrder = 8
+  end
   object adoquery_socios: TADOQuery
     Connection = fDataModule.conexaoDB
     Parameters = <>
     SQL.Strings = (
       '')
-    Left = 648
+    Left = 696
     Top = 16
   end
   object DsSocios: TDataSource
     DataSet = adoquery_socios
-    Left = 624
+    Left = 672
     Top = 16
   end
   object adoquery_aux: TADOQuery

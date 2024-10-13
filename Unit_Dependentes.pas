@@ -30,6 +30,8 @@ type
     btn_Limpar: TBitBtn;
     edt_socio: TMaskEdit;
     btn_socio: TBitBtn;
+    cbSociosOuDependente: TComboBox;
+    Label5: TLabel;
     procedure bloqueia_campos;
     procedure libera_campos;
     procedure bloqueia_salvar(Sender: TObject);
@@ -71,6 +73,7 @@ begin
         begin
           (fDependentes.Components[i] as TEdit).Enabled := false;
           (fDependentes.Components[i] as TEdit).color := clinfobk;
+          btn_socio.Enabled := false;
         end;
     end;
 end;
@@ -104,7 +107,7 @@ begin
         begin
           (fDependentes.Components[i] as TEdit).Enabled := true;
           (fDependentes.Components[i] as TEdit).color := clwhite;
-          btn_pesqusiar.Enabled := true;
+          btn_socio.Enabled := true;
         end;
     end;
 end;
@@ -137,6 +140,7 @@ begin
       if FDependentes.Components[i] is TEdit then
         begin
           (FDependentes.Components[i] as TEdit).Clear;
+          edt_socio.Clear;
         end;
     end;
 end;
@@ -155,7 +159,15 @@ begin
   bloqueia_salvar(Sender);
   limpa_campos;
 
-  adoquery_dependentes.SQL.Text := 'SELECT * FROM DEPENDENTES';
+ adoquery_dependentes.SQL.Text := 'SELECT dependentes.ID AS ' + QuotedStr('ID DEPENDENTE')+','+
+                                  ' Dependentes.nome AS '+QuotedStr('NOME DEPENDENTE')+',' +
+                                  ' Dependentes.idade AS IDADE,'+
+                                  '  socios.id AS '+QuotedStr('ID SOCIO')+','+
+                                  ' socios.nome AS '+QuotedStr('NOME DO SOCIO')+
+                                  '  FROM dependentes '+
+                                  '  INNER JOIN socios '+
+                                  '  ON dependentes.id_socio = socios.id';
+
   adoquery_dependentes.open;
 end;
 
@@ -232,7 +244,6 @@ end;
 
 procedure TfDependentes.btn_editarClick(Sender: TObject);
 begin
-  limpa_campos;
   libera_salvar(Sender);
   libera_campos;
 end;
@@ -248,6 +259,13 @@ begin
   adoquery_aux.Close;
   adoquery_aux.open;
   edt_socio.Text := adoquery_aux.fieldbyname('NOME').AsString;
+  bloqueia_campos;
+
+  btn_novo.Enabled := true;
+  btn_salvar.Enabled := false;
+  btn_editar.Enabled := true;
+  btn_cancelar.Enabled := false;
+  btn_excluir.Enabled := true;
 end;
 
 procedure TfDependentes.btn_excluirClick(Sender: TObject);
@@ -259,7 +277,12 @@ begin
     resposta := MessageDlg('Realmente Deseja excluir este dependente ?', mtConfirmation,[mbYes, mbNo], 0);
       if resposta = mrYes then
         adoquery_aux.SQL.Text := 'DELETE FROM DEPENDENTES WHERE ID = '+ Id_dependente;
+        try
         adoquery_aux.ExecSQL;
+        except
+          on E :exception do
+          ShowMessage('Ocorreu o erro :'+E.Message);
+        end;
         adoquery_dependentes.close;
         adoquery_dependentes.open;
         limpa_campos;
@@ -278,13 +301,32 @@ begin
   if edt_pesquisar.Text = '' then
     ShowMessage('Impossivel Pesquisar')
   else
-    begin
-      adoquery_dependentes.SQL.Text := 'SELECT * FROM DEPENDENTES WHERE NOME LIKE '+
-                                        QuotedStr(edt_pesquisar.text+'%');
-
-      adoquery_dependentes.close;
-      adoquery_dependentes.open;
-    end;
+    if cbSociosOuDependente.ItemIndex = 0 then
+      begin
+        adoquery_dependentes.SQL.Text := 'SELECT dependentes.ID AS ' + QuotedStr('ID DEPENDENTE')+','+
+                                          ' Dependentes.nome AS '+QuotedStr('NOME DEPENDENTE')+',' +
+                                          ' Dependentes.idade AS IDADE,'+
+                                          '  socios.id AS '+QuotedStr('ID SOCIO')+','+
+                                          ' socios.nome AS '+QuotedStr('NOME DO SOCIO')+
+                                          '  FROM dependentes '+
+                                          '  INNER JOIN socios '+
+                                          '  ON dependentes.id_socio = socios.id '+
+                                          '  WHERE DEPENDENTES.NOME LIKE '+QuotedStr(edt_pesquisar.Text+'%')
+      end
+    else if cbSociosOuDependente.ItemIndex = 1 then
+      begin
+       adoquery_dependentes.SQL.Text := 'SELECT dependentes.ID AS ' + QuotedStr('ID DEPENDENTE')+','+
+                                          ' Dependentes.nome AS '+QuotedStr('NOME DEPENDENTE')+',' +
+                                          ' Dependentes.idade AS IDADE,'+
+                                          '  socios.id AS '+QuotedStr('ID SOCIO')+','+
+                                          ' socios.nome AS '+QuotedStr('NOME DO SOCIO')+
+                                          '  FROM dependentes '+
+                                          '  INNER JOIN socios '+
+                                          '  ON dependentes.id_socio = socios.id '+
+                                          '  WHERE SOCIOS.NOME LIKE '+QuotedStr(edt_pesquisar.Text+'%');
+      end;
+    adoquery_dependentes.close;
+    adoquery_dependentes.open;
 end;
 
 procedure TfDependentes.btn_LimparClick(Sender: TObject);

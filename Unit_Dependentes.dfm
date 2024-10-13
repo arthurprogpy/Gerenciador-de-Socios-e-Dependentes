@@ -1,6 +1,6 @@
 object fDependentes: TfDependentes
-  Left = 310
-  Top = 163
+  Left = 301
+  Top = 169
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Dependentes'
@@ -38,11 +38,18 @@ object fDependentes: TfDependentes
     Caption = 'Socio'
   end
   object Label4: TLabel
-    Left = 8
+    Left = 112
     Top = 8
     Width = 46
     Height = 13
     Caption = 'Pesquisar'
+  end
+  object Label5: TLabel
+    Left = 8
+    Top = 8
+    Width = 54
+    Height = 13
+    Caption = 'Buscar por:'
   end
   object pnl_botoes: TPanel
     Left = 168
@@ -136,14 +143,14 @@ object fDependentes: TfDependentes
     OnCellClick = grid_dependenciasCellClick
   end
   object edt_pesquisar: TMaskEdit
-    Left = 8
+    Left = 112
     Top = 24
-    Width = 537
+    Width = 497
     Height = 21
     TabOrder = 4
   end
   object btn_pesqusiar: TBitBtn
-    Left = 552
+    Left = 632
     Top = 24
     Width = 75
     Height = 25
@@ -152,7 +159,7 @@ object fDependentes: TfDependentes
     OnClick = btn_pesqusiarClick
   end
   object btn_Limpar: TBitBtn
-    Left = 632
+    Left = 712
     Top = 24
     Width = 75
     Height = 25
@@ -177,6 +184,19 @@ object fDependentes: TfDependentes
     TabOrder = 8
     OnClick = btn_socioClick
   end
+  object cbSociosOuDependente: TComboBox
+    Left = 8
+    Top = 24
+    Width = 97
+    Height = 21
+    ItemHeight = 13
+    ItemIndex = 1
+    TabOrder = 9
+    Text = 'Dependente'
+    Items.Strings = (
+      'Socio'
+      'Dependente')
+  end
   object ds_dependendias: TDataSource
     DataSet = adoquery_dependentes
     Left = 760
@@ -191,7 +211,7 @@ object fDependentes: TfDependentes
   object adoquery_aux: TADOQuery
     Connection = fDataModule.conexaoDB
     Parameters = <>
-    Left = 744
-    Top = 8
+    Left = 720
+    Top = 65528
   end
 end
