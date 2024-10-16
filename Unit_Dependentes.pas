@@ -8,18 +8,6 @@ uses
 
 type
   TfDependentes = class(TForm)
-    pnl_botoes: TPanel;
-    btn_novo: TBitBtn;
-    btn_editar: TBitBtn;
-    btn_cancelar: TBitBtn;
-    btn_excluir: TBitBtn;
-    btn_fechar: TBitBtn;
-    btn_salvar: TBitBtn;
-    edt_nome: TEdit;
-    Label1: TLabel;
-    edt_idade: TEdit;
-    Label2: TLabel;
-    Label3: TLabel;
     ds_dependendias: TDataSource;
     adoquery_dependentes: TADOQuery;
     adoquery_aux: TADOQuery;
@@ -28,10 +16,23 @@ type
     Label4: TLabel;
     btn_pesqusiar: TBitBtn;
     btn_Limpar: TBitBtn;
-    edt_socio: TMaskEdit;
-    btn_socio: TBitBtn;
     cbSociosOuDependente: TComboBox;
     Label5: TLabel;
+    pnlRodape: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    pnl_botoes: TPanel;
+    btn_novo: TBitBtn;
+    btn_editar: TBitBtn;
+    btn_cancelar: TBitBtn;
+    btn_excluir: TBitBtn;
+    btn_fechar: TBitBtn;
+    btn_salvar: TBitBtn;
+    edt_nome: TEdit;
+    edt_idade: TEdit;
+    edt_socio: TMaskEdit;
+    btn_socio: TBitBtn;
     procedure bloqueia_campos;
     procedure libera_campos;
     procedure bloqueia_salvar(Sender: TObject);
@@ -166,14 +167,15 @@ begin
                                   ' socios.nome AS '+QuotedStr('NOME DO SOCIO')+
                                   '  FROM dependentes '+
                                   '  INNER JOIN socios '+
-                                  '  ON dependentes.id_socio = socios.id';
+                                  '  ON dependentes.id_socio = socios.id'+
+                                  ' WHERE SOCIOS.ATIVO = '+QuotedStr('ATIVO');
 
   adoquery_dependentes.open;
+  Id_dependente := '';
 end;
 
 procedure TfDependentes.btn_salvarClick(Sender: TObject);
 begin
-fDataModule.conexaoDB.BeginTrans;
 if operacao = 'novo' then
   begin
     if (edt_nome.Text = '') or (edt_idade.Text = '') or (edt_socio.Text = '') then
@@ -184,12 +186,16 @@ if operacao = 'novo' then
      begin
       ShowMessage('Insira Pelo Menos 4 caracteres no campo nome !');
      end
+    else if StrToInt(edt_idade.Text) <= 0 then
+      ShowMessage('A idade Tem que ser positiva !')
     else
       begin
         adoquery_aux.SQL.Text := 'INSERT INTO DEPENDENTES VALUES('+
                                   QuotedStr(edt_nome.Text) +','+
                                   QuotedStr(edt_idade.Text) +','+
                                   pk_socio+')';
+
+        fDataModule.conexaoDB.BeginTrans;
         try
         adoquery_aux.ExecSQL;
         fDataModule.conexaoDB.CommitTrans;
@@ -200,9 +206,9 @@ if operacao = 'novo' then
         bloqueia_campos;
         bloqueia_salvar(Sender);
         limpa_campos;
-        adoquery_dependentes.close;
-        adoquery_dependentes.Open;
       end;
+    adoquery_dependentes.close;
+    adoquery_dependentes.Open;
     end
 else if operacao = 'editar' then
   begin
@@ -210,12 +216,16 @@ else if operacao = 'editar' then
     begin
       ShowMessage('Insira no minimo 5 caracteres !')
     end
+    else if Id_dependente = '' then
+      begin
+        ShowMessage('Impossivel Editar !');
+      end
     else
     begin
       adoquery_aux.SQL.Text := 'UPDATE DEPENDENTES SET ' +
                               ' NOME = ' + QuotedStr(edt_nome.Text)+','+
                               ' IDADE = ' + QuotedStr(edt_idade.Text)+','+
-                              ' ID_SOCIO = ' + id_socio+
+                              ' ID_SOCIO = ' + pk_socio+
                               ' WHERE ID = '+ Id_dependente;
 
  //   ShowMessage(adoquery_aux.SQL.Text);
@@ -233,6 +243,8 @@ else if operacao = 'editar' then
       bloqueia_salvar(Sender);
       limpa_campos;
   end;
+  adoquery_dependentes.close;
+  adoquery_dependentes.Open;
 end;
 end;
 procedure TfDependentes.btn_socioClick(Sender: TObject);
@@ -244,16 +256,25 @@ end;
 
 procedure TfDependentes.btn_editarClick(Sender: TObject);
 begin
-  libera_salvar(Sender);
-  libera_campos;
+  if Id_dependente = '' then
+    begin
+      ShowMessage('Impossivel Editar, Selecione alguem !');
+      bloqueia_salvar(Sender);
+      bloqueia_campos;
+    end
+  else
+    begin
+      libera_salvar(Sender);
+      libera_campos;
+    end;
 end;
 
 procedure TfDependentes.grid_dependenciasCellClick(Column: TColumn);
 begin
-  edt_nome.Text := adoquery_dependentes.fieldbyname('NOME').AsString;
+  edt_nome.Text := adoquery_dependentes.fieldbyname('NOME DEPENDENTE').AsString;
   edt_idade.text :=  adoquery_dependentes.fieldbyname('IDADE').AsString;
-  id_socio :=  adoquery_dependentes.fieldbyname('ID_SOCIO').AsString;
-  Id_dependente := adoquery_dependentes.fieldbyname('ID').AsString;
+  id_socio :=  adoquery_dependentes.fieldbyname('ID SOCIO').AsString;
+  Id_dependente := adoquery_dependentes.fieldbyname('ID DEPENDENTE').AsString;
 
   adoquery_aux.SQL.Text := 'SELECT * FROM SOCIOS WHERE ID = ' + id_socio;
   adoquery_aux.Close;
@@ -311,7 +332,7 @@ begin
                                           '  FROM dependentes '+
                                           '  INNER JOIN socios '+
                                           '  ON dependentes.id_socio = socios.id '+
-                                          '  WHERE DEPENDENTES.NOME LIKE '+QuotedStr(edt_pesquisar.Text+'%')
+                                          '  WHERE SOCIOS.NOME LIKE '+QuotedStr(edt_pesquisar.Text+'%')
       end
     else if cbSociosOuDependente.ItemIndex = 1 then
       begin
@@ -323,7 +344,7 @@ begin
                                           '  FROM dependentes '+
                                           '  INNER JOIN socios '+
                                           '  ON dependentes.id_socio = socios.id '+
-                                          '  WHERE SOCIOS.NOME LIKE '+QuotedStr(edt_pesquisar.Text+'%');
+                                          '  WHERE DEPENDENTES.NOME LIKE '+QuotedStr(edt_pesquisar.Text+'%');
       end;
     adoquery_dependentes.close;
     adoquery_dependentes.open;
@@ -334,7 +355,7 @@ begin
   edt_pesquisar.clear;
   adoquery_dependentes.Close;
   adoquery_dependentes.open;
-
+  Id_dependente := '';
 end;
 
 procedure TfDependentes.btn_fecharClick(Sender: TObject);

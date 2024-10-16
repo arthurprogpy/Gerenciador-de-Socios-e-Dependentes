@@ -1,6 +1,6 @@
 object FSocios: TFSocios
-  Left = 389
-  Top = 145
+  Left = 418
+  Top = 175
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Socios'
@@ -25,14 +25,14 @@ object FSocios: TFSocios
     Caption = 'Nome'
   end
   object Label2: TLabel
-    Left = 400
+    Left = 376
     Top = 296
     Width = 32
     Height = 13
     Caption = 'Renda'
   end
   object Label3: TLabel
-    Left = 16
+    Left = 104
     Top = 8
     Width = 76
     Height = 13
@@ -47,14 +47,14 @@ object FSocios: TFSocios
     TabOrder = 0
   end
   object edt_renda: TEdit
-    Left = 400
+    Left = 376
     Top = 312
     Width = 121
     Height = 21
     TabOrder = 1
   end
   object pnl_botoes: TPanel
-    Left = 104
+    Left = 136
     Top = 352
     Width = 425
     Height = 41
@@ -114,7 +114,7 @@ object FSocios: TFSocios
       OnClick = btn_salvarClick
     end
   end
-  object Grid_socios: TDBGrid
+  object gridSocios: TDBGrid
     Left = 16
     Top = 56
     Width = 705
@@ -139,7 +139,7 @@ object FSocios: TFSocios
     OnClick = btn_pesquisaClick
   end
   object edt_pesquisa: TMaskEdit
-    Left = 16
+    Left = 104
     Top = 24
     Width = 425
     Height = 21
@@ -155,7 +155,7 @@ object FSocios: TFSocios
     OnClick = btn_limmparClick
   end
   object RdInativo: TCheckBox
-    Left = 544
+    Left = 552
     Top = 312
     Width = 97
     Height = 17
@@ -163,7 +163,7 @@ object FSocios: TFSocios
     TabOrder = 7
   end
   object RdStatus: TRadioGroup
-    Left = 448
+    Left = 16
     Top = 8
     Width = 81
     Height = 41

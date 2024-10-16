@@ -46,9 +46,11 @@ uses Unit_dataModule, Unit_Dependentes;
 
 procedure TFPesquisa.FormShow(Sender: TObject);
 begin
-  adoquery_pesquisa.SQL.Text := 'SELECT * FROM SOCIOS';
+  adoquery_pesquisa.SQL.Text := 'SELECT * FROM SOCIOS WHERE ATIVO = '+
+                                  QuotedStr('ATIVO');
   adoquery_pesquisa.Close;
   adoquery_pesquisa.Open;
+  pk_socio := '';
 end;
 
 procedure TFPesquisa.btn_pesquisarClick(Sender: TObject);
@@ -57,7 +59,8 @@ if edt_pesquisa.text = '' then
   ShowMessage('Impossivel Pesquisar !')
 else
   begin
-    adoquery_pesquisa.SQL.text := 'SELECT * FROM SOCIOS WHERE NOME LIKE '+QuotedStr(edt_pesquisa.Text+'%');
+    adoquery_pesquisa.SQL.text := 'SELECT * FROM SOCIOS WHERE NOME LIKE '+QuotedStr(edt_pesquisa.Text+'%')+
+                                    'WHERE ATIVO = '+QuotedStr('ativo');
     adoquery_pesquisa.Close;
     adoquery_pesquisa.Open;
   end;

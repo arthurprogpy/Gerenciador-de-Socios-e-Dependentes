@@ -20,7 +20,6 @@ type
     btn_fechar: TBitBtn;
     btn_salvar: TBitBtn;
     adoquery_socios: TADOQuery;
-    Grid_socios: TDBGrid;
     DsSocios: TDataSource;
     adoquery_aux: TADOQuery;
     Label3: TLabel;
@@ -29,6 +28,7 @@ type
     btn_limmpar: TBitBtn;
     RdInativo: TCheckBox;
     RdStatus: TRadioGroup;
+    gridSocios: TDBGrid;
     procedure limpa_campos;
     procedure bloqueia_campos;
     procedure bloqueia_salvar(Sender : TObject);
@@ -40,11 +40,13 @@ type
     procedure btn_salvarClick(Sender: TObject);
     procedure btn_editarClick(Sender: TObject);
     procedure Grid_sociosCellClick(Column: TColumn);
-    function formata_valor(valor, destino: String): String;
+
     procedure btn_pesquisaClick(Sender: TObject);
     procedure btn_limmparClick(Sender: TObject);
     procedure btn_cancelarClick(Sender: TObject);
     procedure btn_excluirClick(Sender: TObject);
+
+
   private
     { Private declarations }
   public
@@ -54,7 +56,7 @@ type
 var
   FSocios: TFSocios;
   valorMonetario: currency;
-  valorConvertido, chave, nome, renda, atividade: string;
+  valorVerificado, chave, nome, renda, atividade: string;
   resposta: Integer;
 
 implementation
@@ -98,9 +100,9 @@ begin
 end;
 
 procedure TFSocios.libera_campos;
-  var i: integer;
+var i: integer;
 begin
-  for i := 1 to FOperadores.ComponentCount -1 do
+  for i := 1 to FSocios.ComponentCount -1 do
     begin
       if FSocios.Components[i] is TEdit then
         begin
@@ -167,6 +169,9 @@ begin
 end;
 
 procedure TFSocios.btn_salvarClick(Sender: TObject);
+var valorComparado : integer;
+valorComparadoString: String;
+comprimentoString, i: integer;
 begin
   if operacao = 'novo' then
     begin
@@ -175,112 +180,134 @@ begin
       else
         if Length(edt_nome.text) <= 4 then
           ShowMessage('Digite pelo menos 5 caracteres no campo Nome !')
-        else
-          begin
-          fDataModule.conexaoDB.BeginTrans;
+        else // INICIO ELSE  PARA VERIFICAR A RENDA
+        begin
+          comprimentoString := length(edt_renda.Text);
 
-          valorConvertido := formata_valor(edt_renda.Text, 'T');
-          edt_renda.text := valorConvertido;
-
-          if StrToFloat(valorConvertido) < 0 then
+          for i := 1 to comprimentoString -1 do  //INICIO FOR PARA PERCORRER A STRING
           begin
-            ShowMessage('Impossivel Adicionar valores negativos');
-            limpa_campos;
-          end
-          else
+            if edt_renda.Text[i] = '.' then   // INICIO IF VERIFICAÇÃO '.'
             begin
-              adoquery_aux.SQL.Text := 'INSERT INTO SOCIOS VALUES('+
-                                        QuotedStr(edt_nome.text)+
-                                        ', :ativo,' +
-                                        QuotedStr(valorConvertido)+ ')';
+              if i + 2 = comprimentoString then // INICIO IF VERIFICAÇÃO SE O PONTO ESTA A DOIS CARACTERES NO FINAL DA STRING
+              begin
+                adoquery_aux.SQL.Text := 'INSERT INTO SOCIOS VALUES('+
+                                          QuotedStr(edt_nome.text)+
+                                          ', :ativo,' +
+                                          edt_renda.Text + ')';
 
-              if RdInativo.Checked = false then
-                adoquery_aux.Parameters.ParamByName('ativo').Value := 'ATIVO'
-              else
+                if RdInativo.Checked = false then // INICIO IF PARA VER SE O RDiNATIVO ESTA MARCADO
+                  adoquery_aux.Parameters.ParamByName('ativo').Value := 'ATIVO'
+                else
                 begin
                   adoquery_aux.Parameters.ParamByName('ativo').Value := 'INATIVO'
+                end;  // FIM IF PARA VER SE O RDiNATIVO ESTA MARCADO
+
+                fDataModule.conexaoDB.BeginTrans;
+                try
+                  adoquery_aux.ExecSQL;
+                  fDataModule.conexaoDB.CommitTrans;;
+                except
+                on E : exception do
+                  ShowMessage('Erro ao inserir: '+ E.message);
                 end;
+
+                ShowMessage('Usuario Inserido com Sucesso !');
+                adoquery_socios.Close;;
+                adoquery_socios.open;
+
+                limpa_campos;
+                bloqueia_salvar(Sender);
+                bloqueia_campos;
+                break;
+              end
+            else if i + 2 < comprimentoString then
+            begin
+              ShowMessage('Insira no formato Monetario sem separadores de milhar. Ex: 100.90');
+              break;
+            end; // FIM IF VERIFICAÇÃO SE O PONTO ESTA A DOIS CARACTERES NO FINAL DA STRING
+          end
+        else if edt_renda.Text[i] = ',' then
+        begin
+          ShowMessage('Utilize ponto no lugar da virgula. Ex: 100.90');
+          break;
+        end;
+      end; // FIM FOR PARA PERCORRER A STRING
+  end; // FIM ELSE PARA VERIFICAR A RENDA
+end // FIM IF OPERACAO = NOVO
+
+else if operacao = 'editar' then
+begin
+
+valorComparadoString := (StringReplace(edt_renda.text,'.','',[rfReplaceAll]));
+valorComparado := StrToint(StringReplace(valorComparadoString,',','',[rfReplaceAll]));
+
+if edt_renda.Text =  '' then
+begin
+  ShowMessage('Preencha algum valor de renda');
+end
+else if valorComparado <= 0 then
+begin
+  ShowMessage('Não é possível inserir valores menores ou iguais a 0 !');
+end
+else
+begin
+  comprimentoString := length(edt_renda.Text);
+
+  for i := 1 to comprimentoString - 1 do
+  begin //INICIO FOR
+    if edt_renda.Text[i] = '.' then
+    begin
+      if i + 2 = comprimentoString then
+      begin
+        if RdInativo.Checked = true then
+          atividade := QuotedStr('INATIVO')
+        else
+          atividade := QuotedStr('ATIVO');
+
+        adoquery_aux.SQL.Text := 'UPDATE SOCIOS SET ' +
+                                  ' NOME = ' + QuotedStr(edt_nome.Text)+ ','+
+                                  ' ATIVO = ' + atividade + ','+
+                                  ' RENDA =  '+ edt_renda.Text +
+                                  ' WHERE ID = ' + chave;
+
+        fDataModule.conexaoDB.BeginTrans;
         try
           adoquery_aux.ExecSQL;
           fDataModule.conexaoDB.CommitTrans;
-          ShowMessage('Usuario Inserido com Sucesso !');
-          adoquery_socios.Close;;
-          adoquery_socios.open;
-          limpa_campos;
-          bloqueia_salvar(Sender);
-          bloqueia_campos;
+
+          adoquery_socios.Close;
+          adoquery_socios.Open;
         except
-        on E : exception do
-          ShowMessage('Erro ao inserir: '+ E.message);
+          on E: exception do
+            ShowMessage('Erro: ' + E.Message);
         end;
-      end;
-  end;
-  end
-    else if operacao = 'editar' then
+
+        ShowMessage('Informações alteradas!');
+        bloqueia_campos;
+        bloqueia_salvar(Sender);
+        break;
+      end
+    else if i + 2 < comprimentoString then
       begin
-        if chave = '' then
-          ShowMessage('Impossivel Alterar')
-        else if Length(edt_nome.Text) <= 4 then
-          begin
-            ShowMessage('Insira Pelo Menos 4 caracteres no campo nome !');
-          end
-        else
-          begin
-            fDataModule.conexaoDB.BeginTrans;
-
-            libera_salvar(Sender);
-            libera_campos;
-
-            if RdInativo.Checked = true then
-              atividade := QuotedStr('INATIVO')
-            else
-              begin
-                atividade := QuotedStr('ATIVO');
-              end;
-
-            valorConvertido := formata_valor(edt_renda.Text, 'T');
-
-            if StrToFloat(valorConvertido) < 0 then
-            begin
-              ShowMessage('Impossivel Adicionar valores negativos !');
-              limpa_campos;
-            end
-             else if Length(edt_nome.Text) <= 4 then
-              begin
-                ShowMessage('Insira Pelo Menos 4 caracteres no campo nome !');
-              end
-            else
-              begin
-                adoquery_aux.SQL.Text := 'UPDATE SOCIOS SET ' +
-                                        ' NOME = ' + QuotedStr(edt_nome.Text)+ ','+
-                                        ' ATIVO = ' + atividade + ','+
-                                        ' RENDA =  '+ valorConvertido +
-                                        ' WHERE ID = ' + chave;
-
-                ShowMessage(adoquery_aux.SQL.Text);
-                try
-                adoquery_aux.ExecSQL;
-                fDataModule.conexaoDB.CommitTrans;
-                ShowMessage('Informações alteradas !');
-
-                adoquery_socios.close;
-                adoquery_socios.Open;
-                except
-                on E: exception do
-                  ShowMessage('Erro: ' + E.Message);
-                end;
-              end;
-                bloqueia_salvar(Sender);
-                bloqueia_campos;
-          end;
+        ShowMessage('Insira no formato Monetario sem separadores de milhar. Ex: 100.90');
+        break;
+      end;
+    end
+    else if edt_renda.Text[i] = ',' then
+    begin
+      ShowMessage('Insira a renda no formato Ex : 1000.09');
+      break;
     end;
+  end;
+end;
+end;
 end;
 procedure TFSocios.btn_editarClick(Sender: TObject);
 begin
   if chave <> '' then
     begin
-      libera_campos;
       libera_salvar(Sender);
+      libera_campos;
     end
   else
     begin
@@ -289,9 +316,11 @@ begin
 end;
 
 procedure TFSocios.Grid_sociosCellClick(Column: TColumn);
+var renda: string;
 begin
   edt_nome.Text := adoquery_socios.fieldbyname('nome').AsString;
-  edt_renda.Text := adoquery_socios.fieldbyname('renda').AsString;
+  renda := adoquery_socios.fieldbyname('renda').AsString;
+  edt_renda.Text := StringReplace(renda, ',','.',[rfreplaceall]);
   nome := adoquery_socios.fieldbyname('nome').AsString;
   chave := adoquery_socios.Fields.Fields[0].AsString;
 
@@ -311,30 +340,6 @@ begin
   btn_excluir.Enabled := true;
 end;
 
-function TfSocios.formata_valor(valor, destino: String): String;
-var
-  valor_formatado: String;
-begin
-  if valor = '' then
-  begin
-    Result := '';
-    exit;
-  end;
-
-  valor_formatado := StringReplace(valor, 'R$', '', [rfReplaceAll]);
-  valor_formatado := StringReplace(valor_formatado, '$', '', [rfReplaceAll]);
-
-  valor_formatado := StringReplace(valor_formatado, ',', '.', [rfReplaceAll]);
-
-  if destino = 'E' then
-  begin
-    Result := FormatCurr('#,##0.00', StrToCurr(valor_formatado));
-  end
-  else
-  begin
-    Result := valor_formatado;
-  end;
-end;
 procedure TFSocios.btn_pesquisaClick(Sender: TObject);
 begin
   if edt_pesquisa.Text = '' then
@@ -402,6 +407,7 @@ begin
           end;
           adoquery_socios.Close;
           adoquery_socios.Open;
+          limpa_campos;
           end;
         end;
     end;

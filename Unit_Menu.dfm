@@ -1,6 +1,6 @@
 object fMenu: TfMenu
-  Left = 530
-  Top = 181
+  Left = 547
+  Top = 184
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Menu'
@@ -92,6 +92,7 @@ object fMenu: TfMenu
     Height = 25
     Caption = 'Relatorios'
     TabOrder = 3
+    OnClick = btn_relatoriosClick
   end
   object btn_fechar: TBitBtn
     Left = 88
@@ -103,5 +104,14 @@ object fMenu: TfMenu
     TabOrder = 4
     OnClick = btn_fecharClick
     Kind = bkCancel
+  end
+  object BitBtn1: TBitBtn
+    Left = 192
+    Top = 40
+    Width = 75
+    Height = 25
+    Caption = 'BitBtn1'
+    TabOrder = 5
+    OnClick = BitBtn1Click
   end
 end

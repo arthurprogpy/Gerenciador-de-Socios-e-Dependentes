@@ -158,7 +158,7 @@ begin
 
     if destino = 'T' then
     begin
-      Result := FormatCurr('R$ #,##0.00', StrToCurr(valor_formatado))
+      Result := FormatCurr('#,##0.00', StrToCurr(valor_formatado))
     end
     else if destino = 'E' then
       begin

@@ -83,7 +83,7 @@ object FPesquisa: TFPesquisa
   end
   object DSPesquisa: TDataSource
     DataSet = adoquery_pesquisa
-    Left = 384
+    Left = 392
   end
   object adoquery_pesquisa: TADOQuery
     Connection = fDataModule.conexaoDB

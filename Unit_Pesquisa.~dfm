@@ -91,6 +91,7 @@ object FPesquisa: TFPesquisa
     Left = 424
   end
   object adoquery_aux: TADOQuery
+    Connection = fDataModule.conexaoDB
     Parameters = <>
     Left = 536
     Top = 296
