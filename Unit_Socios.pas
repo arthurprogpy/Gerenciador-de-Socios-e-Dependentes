@@ -240,9 +240,9 @@
   valorComparadoString := (StringReplace(edt_renda.text,'.','',[rfReplaceAll]));
   valorComparado := StrToint(StringReplace(valorComparadoString,',','',[rfReplaceAll]));
 
-  if edt_renda.Text =  '' then
+  if (edt_renda.Text =  '') or (edt_nome.Text = '') then
   begin
-    ShowMessage('Preencha algum valor de renda');
+    ShowMessage('Preencha algum todos os campos !');
   end
   else if valorComparado <= 0 then
   begin
@@ -288,6 +288,11 @@
       else if i + 2 < comprimentoString then
         begin
           ShowMessage('Insira no formato Monetario sem separadores de milhar. Ex: 100.90');
+          break;
+        end;
+      else if i + 2 > comprimentoString then
+        begin
+          ShowMessage('Insira duas casas decimais apos o ponto. Ex: 100.90');
           break;
         end;
       end
