@@ -105,13 +105,4 @@ object fMenu: TfMenu
     OnClick = btn_fecharClick
     Kind = bkCancel
   end
-  object BitBtn1: TBitBtn
-    Left = 192
-    Top = 40
-    Width = 75
-    Height = 25
-    Caption = 'BitBtn1'
-    TabOrder = 5
-    OnClick = BitBtn1Click
-  end
 end

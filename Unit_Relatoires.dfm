@@ -1,10 +1,10 @@
 object FRelatorioSocios: TFRelatorioSocios
   Left = 356
-  Top = 198
+  Top = 209
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Relatorios'
-  ClientHeight = 440
+  ClientHeight = 429
   ClientWidth = 812
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET

@@ -218,6 +218,7 @@ begin
                 limpa_campos;
                 bloqueia_salvar(Sender);
                 bloqueia_campos;
+                break;
               end
             else if i + 2 < comprimentoString then
             begin
@@ -406,6 +407,7 @@ begin
           end;
           adoquery_socios.Close;
           adoquery_socios.Open;
+          limpa_campos;
           end;
         end;
     end;

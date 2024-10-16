@@ -68,7 +68,7 @@ uses Unit_Socios, Unit_dataModule, Unit_Pesquisa;
 procedure TfDependentes.bloqueia_campos;
 var i: integer;
 begin
-  for i := 1 to FSocios.ComponentCount -1 do
+  for i := 1 to fDependentes.ComponentCount -1 do
     begin
       if fDependentes.Components[i] is TEdit then
         begin
@@ -228,7 +228,7 @@ else if operacao = 'editar' then
                               ' ID_SOCIO = ' + pk_socio+
                               ' WHERE ID = '+ Id_dependente;
 
- //   ShowMessage(adoquery_aux.SQL.Text);
+      fDataModule.conexaoDB.BeginTrans;
       try
       adoquery_aux.ExecSQL;
       ShowMessage('Informações atualizadas com sucesso');

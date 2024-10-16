@@ -96,6 +96,8 @@ begin
             ShowMessage('Este Socio não Possui Dependentes !')
           else
             begin
+              if FRelatorioSocios = nil then
+              Application.CreateForm(TFRelatorioSocios, FRelatorioSocios);
               FRelatorioSocios.RLReport1.Preview;
             end;
     end;

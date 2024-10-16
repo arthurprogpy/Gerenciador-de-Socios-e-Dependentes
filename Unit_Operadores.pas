@@ -8,20 +8,20 @@ uses
 
 type
   TFOperadores = class(TForm)
-    pnl_botoes: TPanel;
-    btn_novo: TBitBtn;
-    btn_editar: TBitBtn;
-    btn_cancelar: TBitBtn;
-    btn_excluir: TBitBtn;
-    btn_fechar: TBitBtn;
     edt_usuario: TEdit;
     edt_nome: TEdit;
     edt_senha: TEdit;
     Usuario: TLabel;
     Nome: TLabel;
     Senha: TLabel;
-    btn_salvar: TBitBtn;
     adoquery_operadores: TADOQuery;
+    pnl_botoes: TPanel;
+    btn_novo: TBitBtn;
+    btn_editar: TBitBtn;
+    btn_cancelar: TBitBtn;
+    btn_excluir: TBitBtn;
+    btn_fechar: TBitBtn;
+    btn_salvar: TBitBtn;
     procedure bloqueia_campos;
     procedure libera_campos;
     procedure limpa_campos;
