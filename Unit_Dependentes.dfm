@@ -50,6 +50,7 @@ object fDependentes: TfDependentes
     Top = 24
     Width = 497
     Height = 21
+    Cursor = crIBeam
     TabOrder = 1
   end
   object btn_pesqusiar: TBitBtn
@@ -57,6 +58,7 @@ object fDependentes: TfDependentes
     Top = 24
     Width = 75
     Height = 25
+    Cursor = crHandPoint
     Caption = 'Pesquisar'
     TabOrder = 2
     OnClick = btn_pesqusiarClick
@@ -80,6 +82,7 @@ object fDependentes: TfDependentes
     Top = 24
     Width = 75
     Height = 25
+    Cursor = crHandPoint
     Caption = 'Limpar'
     TabOrder = 3
     OnClick = btn_LimparClick
@@ -150,6 +153,7 @@ object fDependentes: TfDependentes
         Top = 8
         Width = 75
         Height = 25
+        Cursor = crHandPoint
         Caption = 'Novo'
         TabOrder = 0
         OnClick = btn_novoClick
@@ -173,6 +177,7 @@ object fDependentes: TfDependentes
         Top = 8
         Width = 75
         Height = 25
+        Cursor = crHandPoint
         Caption = 'Editar'
         TabOrder = 1
         OnClick = btn_editarClick
@@ -196,6 +201,7 @@ object fDependentes: TfDependentes
         Top = 8
         Width = 75
         Height = 25
+        Cursor = crHandPoint
         Caption = 'Cancelar'
         TabOrder = 2
         OnClick = btn_cancelarClick
@@ -219,6 +225,7 @@ object fDependentes: TfDependentes
         Top = 8
         Width = 75
         Height = 25
+        Cursor = crHandPoint
         Caption = 'Excluir'
         TabOrder = 3
         OnClick = btn_excluirClick
@@ -242,6 +249,7 @@ object fDependentes: TfDependentes
         Top = 8
         Width = 75
         Height = 25
+        Cursor = crHandPoint
         Caption = 'Fechar'
         TabOrder = 4
         OnClick = btn_fecharClick
@@ -252,6 +260,7 @@ object fDependentes: TfDependentes
         Top = 8
         Width = 75
         Height = 25
+        Cursor = crHandPoint
         Caption = 'Salvar'
         TabOrder = 5
         OnClick = btn_salvarClick
@@ -276,6 +285,7 @@ object fDependentes: TfDependentes
       Top = 28
       Width = 369
       Height = 21
+      Cursor = crIBeam
       MaxLength = 50
       TabOrder = 1
     end
@@ -284,6 +294,7 @@ object fDependentes: TfDependentes
       Top = 28
       Width = 49
       Height = 21
+      Cursor = crIBeam
       TabOrder = 2
     end
     object edt_socio: TMaskEdit
@@ -291,6 +302,7 @@ object fDependentes: TfDependentes
       Top = 28
       Width = 209
       Height = 21
+      Cursor = crIBeam
       Color = clInfoBk
       Enabled = False
       TabOrder = 3

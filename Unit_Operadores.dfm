@@ -42,6 +42,7 @@ object FOperadores: TFOperadores
     Top = 32
     Width = 137
     Height = 21
+    Cursor = crIBeam
     TabOrder = 0
   end
   object edt_nome: TEdit
@@ -49,6 +50,7 @@ object FOperadores: TFOperadores
     Top = 88
     Width = 321
     Height = 21
+    Cursor = crIBeam
     TabOrder = 1
   end
   object edt_senha: TEdit
@@ -56,6 +58,7 @@ object FOperadores: TFOperadores
     Top = 32
     Width = 169
     Height = 21
+    Cursor = crIBeam
     PasswordChar = '*'
     TabOrder = 2
   end
@@ -70,6 +73,7 @@ object FOperadores: TFOperadores
       Top = 8
       Width = 75
       Height = 25
+      Cursor = crHandPoint
       Caption = 'Novo'
       TabOrder = 0
       OnClick = btn_novoClick
@@ -93,6 +97,7 @@ object FOperadores: TFOperadores
       Top = 8
       Width = 75
       Height = 25
+      Cursor = crHandPoint
       Caption = 'Editar'
       TabOrder = 1
       OnClick = btn_editarClick
@@ -116,6 +121,7 @@ object FOperadores: TFOperadores
       Top = 8
       Width = 75
       Height = 25
+      Cursor = crHandPoint
       Caption = 'Cancelar'
       TabOrder = 2
       OnClick = btn_cancelarClick
@@ -139,6 +145,7 @@ object FOperadores: TFOperadores
       Top = 8
       Width = 75
       Height = 25
+      Cursor = crHandPoint
       Caption = 'Excluir'
       TabOrder = 3
       Glyph.Data = {
@@ -161,6 +168,7 @@ object FOperadores: TFOperadores
       Top = 8
       Width = 75
       Height = 25
+      Cursor = crHandPoint
       Caption = 'Fechar'
       TabOrder = 4
       OnClick = btn_fecharClick
@@ -171,6 +179,7 @@ object FOperadores: TFOperadores
       Top = 8
       Width = 75
       Height = 25
+      Cursor = crHandPoint
       Caption = 'Salvar'
       TabOrder = 5
       OnClick = btn_salvarClick

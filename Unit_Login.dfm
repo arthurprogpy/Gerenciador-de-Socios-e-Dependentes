@@ -1,6 +1,6 @@
 object fLogin: TfLogin
-  Left = 472
-  Top = 206
+  Left = 486
+  Top = 220
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Login'
@@ -35,6 +35,7 @@ object fLogin: TfLogin
     Top = 48
     Width = 209
     Height = 21
+    Cursor = crIBeam
     TabOrder = 0
     Text = 'adm'
   end
@@ -43,6 +44,7 @@ object fLogin: TfLogin
     Top = 104
     Width = 209
     Height = 21
+    Cursor = crIBeam
     PasswordChar = '*'
     TabOrder = 1
     Text = '123'
@@ -63,6 +65,7 @@ object fLogin: TfLogin
     Top = 160
     Width = 75
     Height = 25
+    Cursor = crHandPoint
     Caption = 'Sair'
     TabOrder = 3
     OnClick = btn_sairClick

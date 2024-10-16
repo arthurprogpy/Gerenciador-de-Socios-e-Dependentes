@@ -1,6 +1,6 @@
 object FOperadores: TFOperadores
-  Left = 680
-  Top = 214
+  Left = 683
+  Top = 231
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Operadores'

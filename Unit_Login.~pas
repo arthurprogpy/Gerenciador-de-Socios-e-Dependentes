@@ -22,7 +22,6 @@ type
     procedure BitBtn1Click(Sender: TObject);
     function validacao(usuario, senha: string) :boolean;
     function autenticacao :boolean;
-    function formata_valor(valor, destino: String) : String;
   private
     { Private declarations }
     senha : String;

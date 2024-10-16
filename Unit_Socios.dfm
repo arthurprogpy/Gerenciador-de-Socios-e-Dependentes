@@ -14,6 +14,7 @@ object FSocios: TFSocios
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -43,6 +44,7 @@ object FSocios: TFSocios
     Top = 312
     Width = 313
     Height = 21
+    Cursor = crIBeam
     MaxLength = 50
     TabOrder = 0
   end
@@ -51,6 +53,7 @@ object FSocios: TFSocios
     Top = 312
     Width = 121
     Height = 21
+    Cursor = crIBeam
     TabOrder = 1
   end
   object pnl_botoes: TPanel
@@ -64,6 +67,7 @@ object FSocios: TFSocios
       Top = 8
       Width = 75
       Height = 25
+      Cursor = crHandPoint
       Caption = 'Novo'
       TabOrder = 0
       OnClick = btn_novoClick
@@ -87,6 +91,7 @@ object FSocios: TFSocios
       Top = 8
       Width = 75
       Height = 25
+      Cursor = crHandPoint
       Caption = 'Editar'
       TabOrder = 1
       OnClick = btn_editarClick
@@ -110,6 +115,7 @@ object FSocios: TFSocios
       Top = 8
       Width = 75
       Height = 25
+      Cursor = crHandPoint
       Caption = 'Cancelar'
       TabOrder = 2
       OnClick = btn_cancelarClick
@@ -133,6 +139,7 @@ object FSocios: TFSocios
       Top = 8
       Width = 75
       Height = 25
+      Cursor = crHandPoint
       Caption = 'Excluir'
       TabOrder = 3
       OnClick = btn_excluirClick
@@ -156,6 +163,7 @@ object FSocios: TFSocios
       Top = 8
       Width = 75
       Height = 25
+      Cursor = crHandPoint
       Caption = 'Fechar'
       TabOrder = 4
       OnClick = btn_fecharClick
@@ -166,6 +174,7 @@ object FSocios: TFSocios
       Top = 8
       Width = 75
       Height = 25
+      Cursor = crHandPoint
       Caption = 'Salvar'
       TabOrder = 5
       OnClick = btn_salvarClick
@@ -205,6 +214,7 @@ object FSocios: TFSocios
     Top = 16
     Width = 75
     Height = 25
+    Cursor = crHandPoint
     Caption = 'Pesquisar'
     TabOrder = 4
     OnClick = btn_pesquisaClick
@@ -228,6 +238,7 @@ object FSocios: TFSocios
     Top = 24
     Width = 425
     Height = 21
+    Cursor = crIBeam
     TabOrder = 5
   end
   object btn_limmpar: TBitBtn
@@ -235,6 +246,7 @@ object FSocios: TFSocios
     Top = 16
     Width = 75
     Height = 25
+    Cursor = crHandPoint
     Caption = 'Limpar'
     TabOrder = 6
     OnClick = btn_limmparClick

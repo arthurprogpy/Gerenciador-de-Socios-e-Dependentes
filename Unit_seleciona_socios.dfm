@@ -37,6 +37,7 @@ object fSelecionaSocio: TfSelecionaSocio
     Top = 248
     Width = 105
     Height = 25
+    Cursor = crHandPoint
     Caption = 'Gerar Relatorio'
     TabOrder = 1
     OnClick = btn_gerar_relatorioClick
@@ -75,6 +76,7 @@ object fSelecionaSocio: TfSelecionaSocio
     Top = 248
     Width = 75
     Height = 25
+    Cursor = crHandPoint
     Caption = 'Fechar'
     TabOrder = 3
     OnClick = btn_fecharClick

@@ -1,6 +1,6 @@
 object fMenu: TfMenu
-  Left = 547
-  Top = 184
+  Left = 597
+  Top = 265
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Menu'
@@ -21,6 +21,7 @@ object fMenu: TfMenu
     Top = 136
     Width = 105
     Height = 25
+    Cursor = crHandPoint
     Caption = 'Operadores'
     TabOrder = 0
     OnClick = btn_operadoresClick
@@ -44,6 +45,7 @@ object fMenu: TfMenu
     Top = 16
     Width = 105
     Height = 25
+    Cursor = crHandPoint
     Caption = 'Socios'
     TabOrder = 1
     OnClick = btn_sociosClick
@@ -67,6 +69,7 @@ object fMenu: TfMenu
     Top = 56
     Width = 105
     Height = 25
+    Cursor = crHandPoint
     Caption = 'Dependentes'
     TabOrder = 2
     OnClick = btn_dependentesClick
@@ -90,6 +93,7 @@ object fMenu: TfMenu
     Top = 96
     Width = 105
     Height = 25
+    Cursor = crHandPoint
     Caption = 'Relatorios'
     TabOrder = 3
     OnClick = btn_relatoriosClick

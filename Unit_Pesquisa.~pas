@@ -46,7 +46,8 @@ uses Unit_dataModule, Unit_Dependentes;
 
 procedure TFPesquisa.FormShow(Sender: TObject);
 begin
-  adoquery_pesquisa.SQL.Text := 'SELECT * FROM SOCIOS';
+  adoquery_pesquisa.SQL.Text := 'SELECT * FROM SOCIOS WHERE ATIVO = '+
+                                  QuotedStr('ATIVO');
   adoquery_pesquisa.Close;
   adoquery_pesquisa.Open;
   pk_socio := '';
