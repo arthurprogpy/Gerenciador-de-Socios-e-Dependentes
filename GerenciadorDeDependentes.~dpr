@@ -19,6 +19,7 @@ begin
   Application.Initialize;
   Application.CreateForm(TfLogin, fLogin);
   Application.CreateForm(TfDataModule, fDataModule);
+  Application.CreateForm(TFPesquisa, FPesquisa);
   if fLogin.autenticacao = false then
     begin
       Application.Terminate;

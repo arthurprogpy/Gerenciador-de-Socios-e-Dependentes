@@ -17,6 +17,7 @@ uses
 
 begin
   Application.Initialize;
+  Application.Title := 'Gerenciador de Socios e Dependentes';
   Application.CreateForm(TfLogin, fLogin);
   Application.CreateForm(TfDataModule, fDataModule);
   Application.CreateForm(TFPesquisa, FPesquisa);
