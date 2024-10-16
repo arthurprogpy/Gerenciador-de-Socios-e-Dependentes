@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, DB, ADODB;
+  Dialogs, StdCtrls, Buttons, DB, ADODB, ExtCtrls;
 
 type
   TfLogin = class(TForm)
@@ -15,6 +15,8 @@ type
     btn_entrar: TBitBtn;
     btn_sair: TBitBtn;
     adoquery_login: TADOQuery;
+    imgUser: TImage;
+    imgPass: TImage;
     procedure btn_sairClick(Sender: TObject);
     procedure btn_entrarClick(Sender: TObject);
     function descriptografa (texto :String) :String;
