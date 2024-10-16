@@ -18,21 +18,21 @@ object fLogin: TfLogin
   TextHeight = 13
   object Label1: TLabel
     Left = 128
-    Top = 0
+    Top = 8
     Width = 36
     Height = 13
     Caption = 'Usu'#225'rio'
   end
   object Label2: TLabel
     Left = 128
-    Top = 56
+    Top = 64
     Width = 31
     Height = 13
     Caption = 'Senha'
   end
   object imgUser: TImage
     Left = 0
-    Top = 8
+    Top = 16
     Width = 33
     Height = 33
     Picture.Data = {
@@ -174,7 +174,7 @@ object fLogin: TfLogin
   end
   object imgPass: TImage
     Left = 0
-    Top = 64
+    Top = 72
     Width = 33
     Height = 25
     ParentShowHint = False
@@ -318,7 +318,7 @@ object fLogin: TfLogin
   end
   object edt_usuario: TEdit
     Left = 40
-    Top = 16
+    Top = 24
     Width = 209
     Height = 21
     Cursor = crIBeam
@@ -327,7 +327,7 @@ object fLogin: TfLogin
   end
   object edt_senha: TEdit
     Left = 40
-    Top = 72
+    Top = 80
     Width = 209
     Height = 21
     Cursor = crIBeam
