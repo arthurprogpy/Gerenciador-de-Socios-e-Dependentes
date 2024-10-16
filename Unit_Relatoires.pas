@@ -22,6 +22,7 @@ type
     RLDBText5: TRLDBText;
     RLLabel7: TRLLabel;
     RLDBText1: TRLDBText;
+    rlbl1: TRLLabel;
   private
     { Private declarations }
   public

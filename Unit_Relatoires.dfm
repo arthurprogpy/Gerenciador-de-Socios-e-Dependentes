@@ -89,10 +89,24 @@ object FRelatorioSocios: TFRelatorioSocios
       object RLDBText1: TRLDBText
         Left = 120
         Top = 104
-        Width = 537
+        Width = 111
         Height = 16
         DataField = 'NOME DO SOCIO'
         DataSource = fSelecionaSocio.DsAuxiliar
+      end
+      object rlbl1: TRLLabel
+        Left = 179
+        Top = 48
+        Width = 362
+        Height = 23
+        Alignment = taCenter
+        Caption = 'Relat'#243'rio Dependentes por S'#243'cio'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -19
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
       end
     end
     object information: TRLBand
@@ -119,7 +133,7 @@ object FRelatorioSocios: TFRelatorioSocios
       object RLDBText5: TRLDBText
         Left = 8
         Top = 8
-        Width = 49
+        Width = 108
         Height = 16
         DataField = 'ID DEPENDENTE'
         DataSource = fSelecionaSocio.DsAuxiliar
