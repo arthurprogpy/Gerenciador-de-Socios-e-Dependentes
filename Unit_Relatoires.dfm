@@ -1,6 +1,6 @@
 object FRelatorioSocios: TFRelatorioSocios
-  Left = 356
-  Top = 209
+  Left = 364
+  Top = 199
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Relatorios'
