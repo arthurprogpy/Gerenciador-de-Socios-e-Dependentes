@@ -221,12 +221,12 @@
                 end
               else if i + 2 < comprimentoString then
               begin
-                ShowMessage('Insira no formato Monetario sem separadores de milhar. Ex: 100.90');
+                ShowMessage('Insira no formato Monetario sem separadores de milhar. Ex: 1000.90');
                 break;
               end // FIM IF VERIFICAÇÃO SE O PONTO ESTA A DOIS CARACTERES NO FINAL DA STRING
               else if i + 2 > comprimentoString then
               begin
-                ShowMessage('Insira duas casas decimais apos o ponto. Ex: 100.90');
+                ShowMessage('Insira duas casas decimais apos o ponto. Ex: 1000.90');
                 break;
               end;
             end
