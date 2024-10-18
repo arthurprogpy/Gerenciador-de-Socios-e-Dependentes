@@ -5,7 +5,7 @@ object FOperadores: TFOperadores
   BorderStyle = bsSingle
   Caption = 'Operadores'
   ClientHeight = 186
-  ClientWidth = 453
+  ClientWidth = 551
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -48,10 +48,10 @@ object FOperadores: TFOperadores
   object edt_nome: TEdit
     Left = 16
     Top = 88
-    Width = 321
+    Width = 385
     Height = 21
     Cursor = crIBeam
-    TabOrder = 1
+    TabOrder = 2
   end
   object edt_senha: TEdit
     Left = 168
@@ -60,22 +60,22 @@ object FOperadores: TFOperadores
     Height = 21
     Cursor = crIBeam
     PasswordChar = '*'
-    TabOrder = 2
+    TabOrder = 1
   end
   object pnl_botoes: TPanel
-    Left = 12
+    Left = 8
     Top = 128
-    Width = 425
+    Width = 537
     Height = 41
     TabOrder = 3
     object btn_novo: TBitBtn
-      Left = -8
+      Left = 187
       Top = 8
       Width = 75
       Height = 25
       Cursor = crHandPoint
       Caption = 'Novo'
-      TabOrder = 0
+      TabOrder = 2
       OnClick = btn_novoClick
       Glyph.Data = {
         76010000424D7601000000000000760000002800000020000000100000000100
@@ -93,13 +93,13 @@ object FOperadores: TFOperadores
       NumGlyphs = 2
     end
     object btn_editar: TBitBtn
-      Left = 136
+      Left = 11
       Top = 8
       Width = 75
       Height = 25
       Cursor = crHandPoint
       Caption = 'Editar'
-      TabOrder = 1
+      TabOrder = 0
       OnClick = btn_editarClick
       Glyph.Data = {
         76010000424D7601000000000000760000002800000020000000100000000100
@@ -117,13 +117,13 @@ object FOperadores: TFOperadores
       NumGlyphs = 2
     end
     object btn_cancelar: TBitBtn
-      Left = 208
+      Left = 99
       Top = 8
       Width = 75
       Height = 25
       Cursor = crHandPoint
       Caption = 'Cancelar'
-      TabOrder = 2
+      TabOrder = 1
       OnClick = btn_cancelarClick
       Glyph.Data = {
         76010000424D7601000000000000760000002800000020000000100000000100
@@ -141,7 +141,7 @@ object FOperadores: TFOperadores
       NumGlyphs = 2
     end
     object btn_excluir: TBitBtn
-      Left = 280
+      Left = 275
       Top = 8
       Width = 75
       Height = 25
@@ -164,7 +164,7 @@ object FOperadores: TFOperadores
       NumGlyphs = 2
     end
     object btn_fechar: TBitBtn
-      Left = 352
+      Left = 363
       Top = 8
       Width = 75
       Height = 25
@@ -175,7 +175,7 @@ object FOperadores: TFOperadores
       Kind = bkCancel
     end
     object btn_salvar: TBitBtn
-      Left = 64
+      Left = 459
       Top = 8
       Width = 75
       Height = 25
@@ -202,7 +202,7 @@ object FOperadores: TFOperadores
   object adoquery_operadores: TADOQuery
     Connection = fDataModule.conexaoDB
     Parameters = <>
-    Left = 368
-    Top = 8
+    Left = 496
+    Top = 16
   end
 end

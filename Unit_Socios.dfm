@@ -1,6 +1,6 @@
 object FSocios: TFSocios
-  Left = 439
-  Top = 276
+  Left = 408
+  Top = 218
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Socios'
@@ -139,6 +139,7 @@ object FSocios: TFSocios
       Width = 121
       Height = 21
       Cursor = crIBeam
+      MaxLength = 8
       TabOrder = 1
       OnChange = edt_rendaChange
       OnKeyPress = edt_rendaKeyPress

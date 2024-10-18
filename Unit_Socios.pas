@@ -227,7 +227,7 @@
   valorComparadoString := (StringReplace(edt_renda.text,'.','',[rfReplaceAll]));
   valorComparado := StrToint(StringReplace(valorComparadoString,',','',[rfReplaceAll]));
 
-  if (edt_renda.Text =  '') or (edt_nome.Text = '') then
+  if (trim(edt_renda.Text) =  '') or (trim(edt_nome.Text) = '') then
   begin
     ShowMessage('Preencha algum todos os campos !');
   end
@@ -236,14 +236,7 @@
       ShowMessage('Não é possível inserir valores menores ou iguais a 0 !');
   end
   else
-  begin
-    comprimentoString := length(edt_renda.Text);
-    for i := 1 to comprimentoString - 1 do
-    begin //INICIO FOR
-      if edt_renda.Text[i] = '.' then
-      begin
-        if i + 2 = comprimentoString then
-        begin
+    begin
           if RdInativo.Checked = true then
             atividade := QuotedStr('INATIVO')
           else
@@ -270,27 +263,8 @@
           ShowMessage('Informações alteradas!');
           bloqueia_campos;
           bloqueia_salvar(Sender);
-          break;
         end
-      else if i + 2 < comprimentoString then
-        begin
-          ShowMessage('Insira no formato Monetario sem separadores de milhar. Ex: 100.90');
-          break;
-        end
-      else if i + 2 > comprimentoString then
-        begin
-          ShowMessage('Insira duas casas decimais apos o ponto. Ex: 100.90');
-          break;
-        end;
-      end
-      else if edt_renda.Text[i] = ',' then
-      begin
-        ShowMessage('Insira a renda no formato Ex : 1000.09');
-        break;
-      end;
     end;
-  end;
-  end;
   end;
   procedure TFSocios.btn_editarClick(Sender: TObject);
   begin
@@ -309,7 +283,6 @@
   var renda: string;
   begin
     edt_nome.Text := adoquery_socios.fieldbyname('nome').AsString;
-    renda := adoquery_socios.fieldbyname('renda').AsString;
     edt_renda.Text := FormatFloat('0.00', adoquery_socios.fieldbyname('renda').AsCurrency);
     nome := adoquery_socios.fieldbyname('nome').AsString;
     chave := adoquery_socios.Fields.Fields[0].AsString;

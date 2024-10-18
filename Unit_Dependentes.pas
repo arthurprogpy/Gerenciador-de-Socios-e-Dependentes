@@ -190,7 +190,7 @@ procedure TfDependentes.btn_salvarClick(Sender: TObject);
 begin
 if operacao = 'novo' then
   begin
-    if (edt_nome.Text = '') or (edt_idade.Text = '') or (edt_socio.Text = '') then
+    if (Trim(edt_nome.Text) = '') or (Trim(edt_idade.Text) = '') or (Trim(edt_socio.Text )= '') then
       begin
         ShowMessage('Preencha todos os campos !');
       end
@@ -333,7 +333,7 @@ end;
 procedure TfDependentes.btn_pesqusiarClick(Sender: TObject);
 begin
   if edt_pesquisar.Text = '' then
-    ShowMessage('Impossivel Pesquisar')
+    ShowMessage('Insira um Nome para pesquisar!')
   else
     if cbSociosOuDependente.ItemIndex = 0 then
       begin
