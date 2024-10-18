@@ -1,6 +1,6 @@
 object fDependentes: TfDependentes
-  Left = 233
-  Top = 123
+  Left = 292
+  Top = 155
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Dependentes'
@@ -16,111 +16,14 @@ object fDependentes: TfDependentes
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object Label4: TLabel
-    Left = 112
-    Top = 8
-    Width = 46
-    Height = 13
-    Caption = 'Pesquisar'
-  end
-  object Label5: TLabel
-    Left = 8
-    Top = 8
-    Width = 54
-    Height = 13
-    Caption = 'Buscar por:'
-  end
-  object grid_dependencias: TDBGrid
-    Left = 8
-    Top = 56
-    Width = 785
-    Height = 289
-    DataSource = ds_dependendias
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-    TabOrder = 0
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    OnCellClick = grid_dependenciasCellClick
-  end
-  object edt_pesquisar: TMaskEdit
-    Left = 112
-    Top = 24
-    Width = 497
-    Height = 21
-    Cursor = crIBeam
-    TabOrder = 1
-  end
-  object btn_pesqusiar: TBitBtn
-    Left = 632
-    Top = 24
-    Width = 75
-    Height = 25
-    Cursor = crHandPoint
-    Caption = 'Pesquisar'
-    TabOrder = 2
-    OnClick = btn_pesqusiarClick
-    Glyph.Data = {
-      76010000424D7601000000000000760000002800000020000000100000000100
-      04000000000000010000130B0000130B00001000000000000000000000000000
-      800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
-      33033333333333333F7F3333333333333000333333333333F777333333333333
-      000333333333333F777333333333333000333333333333F77733333333333300
-      033333333FFF3F777333333700073B703333333F7773F77733333307777700B3
-      33333377333777733333307F8F8F7033333337F333F337F3333377F8F9F8F773
-      3333373337F3373F3333078F898F870333337F33F7FFF37F333307F99999F703
-      33337F377777337F3333078F898F8703333373F337F33373333377F8F9F8F773
-      333337F3373337F33333307F8F8F70333333373FF333F7333333330777770333
-      333333773FF77333333333370007333333333333777333333333}
-    NumGlyphs = 2
-  end
-  object btn_Limpar: TBitBtn
-    Left = 712
-    Top = 24
-    Width = 75
-    Height = 25
-    Cursor = crHandPoint
-    Caption = 'Limpar'
-    TabOrder = 3
-    OnClick = btn_LimparClick
-    Glyph.Data = {
-      76010000424D7601000000000000760000002800000020000000100000000100
-      04000000000000010000120B0000120B00001000000000000000000000000000
-      800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333000000000
-      3333333777777777F3333330F777777033333337F3F3F3F7F3333330F0808070
-      33333337F7F7F7F7F3333330F080707033333337F7F7F7F7F3333330F0808070
-      33333337F7F7F7F7F3333330F080707033333337F7F7F7F7F3333330F0808070
-      333333F7F7F7F7F7F3F33030F080707030333737F7F7F7F7F7333300F0808070
-      03333377F7F7F7F773333330F080707033333337F7F7F7F7F333333070707070
-      33333337F7F7F7F7FF3333000000000003333377777777777F33330F88877777
-      0333337FFFFFFFFF7F3333000000000003333377777777777333333330777033
-      3333333337FFF7F3333333333000003333333333377777333333}
-    NumGlyphs = 2
-  end
-  object cbSociosOuDependente: TComboBox
-    Left = 8
-    Top = 24
-    Width = 97
-    Height = 21
-    ItemHeight = 13
-    ItemIndex = 1
-    TabOrder = 4
-    Text = 'Dependente'
-    Items.Strings = (
-      'Socio'
-      'Dependente')
-  end
   object pnlRodape: TPanel
     Left = 0
     Top = 346
     Width = 806
     Height = 97
     Align = alBottom
-    TabOrder = 5
+    Color = cl3DLight
+    TabOrder = 0
     object Label1: TLabel
       Left = 64
       Top = 12
@@ -142,12 +45,61 @@ object fDependentes: TfDependentes
       Height = 13
       Caption = 'Socio'
     end
+    object edt_nome: TEdit
+      Left = 64
+      Top = 28
+      Width = 369
+      Height = 21
+      Cursor = crIBeam
+      MaxLength = 50
+      TabOrder = 0
+    end
+    object edt_idade: TEdit
+      Left = 704
+      Top = 28
+      Width = 49
+      Height = 21
+      Cursor = crIBeam
+      TabOrder = 1
+    end
+    object edt_socio: TMaskEdit
+      Left = 448
+      Top = 28
+      Width = 209
+      Height = 21
+      Cursor = crIBeam
+      Color = clInfoBk
+      Enabled = False
+      TabOrder = 2
+    end
+    object btn_socio: TBitBtn
+      Left = 664
+      Top = 24
+      Width = 33
+      Height = 25
+      TabOrder = 3
+      OnClick = btn_socioClick
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000130B0000130B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        33333333FF33333333FF333993333333300033377F3333333777333993333333
+        300033F77FFF3333377739999993333333333777777F3333333F399999933333
+        33003777777333333377333993333333330033377F3333333377333993333333
+        3333333773333333333F333333333333330033333333F33333773333333C3333
+        330033333337FF3333773333333CC333333333FFFFF77FFF3FF33CCCCCCCCCC3
+        993337777777777F77F33CCCCCCCCCC3993337777777777377333333333CC333
+        333333333337733333FF3333333C333330003333333733333777333333333333
+        3000333333333333377733333333333333333333333333333333}
+      NumGlyphs = 2
+    end
     object pnl_botoes: TPanel
       Left = 176
-      Top = 48
+      Top = 56
       Width = 425
       Height = 41
-      TabOrder = 0
+      TabOrder = 4
       object btn_novo: TBitBtn
         Left = -8
         Top = 8
@@ -156,7 +108,6 @@ object fDependentes: TfDependentes
         Cursor = crHandPoint
         Caption = 'Novo'
         TabOrder = 0
-        OnClick = btn_novoClick
         Glyph.Data = {
           76010000424D7601000000000000760000002800000020000000100000000100
           04000000000000010000130B0000130B00001000000000000000000000000000
@@ -180,7 +131,6 @@ object fDependentes: TfDependentes
         Cursor = crHandPoint
         Caption = 'Editar'
         TabOrder = 1
-        OnClick = btn_editarClick
         Glyph.Data = {
           76010000424D7601000000000000760000002800000020000000100000000100
           04000000000000010000120B0000120B00001000000000000000000000000000
@@ -204,7 +154,6 @@ object fDependentes: TfDependentes
         Cursor = crHandPoint
         Caption = 'Cancelar'
         TabOrder = 2
-        OnClick = btn_cancelarClick
         Glyph.Data = {
           76010000424D7601000000000000760000002800000020000000100000000100
           04000000000000010000130B0000130B00001000000000000000000000000000
@@ -228,7 +177,6 @@ object fDependentes: TfDependentes
         Cursor = crHandPoint
         Caption = 'Excluir'
         TabOrder = 3
-        OnClick = btn_excluirClick
         Glyph.Data = {
           76010000424D7601000000000000760000002800000020000000100000000100
           04000000000000010000120B0000120B00001000000000000000000000000000
@@ -252,7 +200,6 @@ object fDependentes: TfDependentes
         Cursor = crHandPoint
         Caption = 'Fechar'
         TabOrder = 4
-        OnClick = btn_fecharClick
         Kind = bkCancel
       end
       object btn_salvar: TBitBtn
@@ -263,7 +210,6 @@ object fDependentes: TfDependentes
         Cursor = crHandPoint
         Caption = 'Salvar'
         TabOrder = 5
-        OnClick = btn_salvarClick
         Glyph.Data = {
           76010000424D7601000000000000760000002800000020000000100000000100
           04000000000000010000130B0000130B00001000000000000000000000000000
@@ -280,71 +226,136 @@ object fDependentes: TfDependentes
         NumGlyphs = 2
       end
     end
-    object edt_nome: TEdit
-      Left = 64
+  end
+  object pnlTop: TPanel
+    Left = 0
+    Top = 0
+    Width = 806
+    Height = 65
+    Align = alTop
+    Color = cl3DLight
+    TabOrder = 1
+    object Label5: TLabel
+      Left = 8
+      Top = 12
+      Width = 54
+      Height = 13
+      Caption = 'Buscar por:'
+    end
+    object Label4: TLabel
+      Left = 112
+      Top = 12
+      Width = 46
+      Height = 13
+      Caption = 'Pesquisar'
+    end
+    object cbSociosOuDependente: TComboBox
+      Left = 8
       Top = 28
-      Width = 369
+      Width = 97
+      Height = 21
+      ItemHeight = 13
+      ItemIndex = 1
+      TabOrder = 0
+      Text = 'Dependente'
+      Items.Strings = (
+        'Socio'
+        'Dependente')
+    end
+    object edt_pesquisar: TMaskEdit
+      Left = 112
+      Top = 28
+      Width = 489
       Height = 21
       Cursor = crIBeam
-      MaxLength = 50
       TabOrder = 1
     end
-    object edt_idade: TEdit
-      Left = 704
-      Top = 28
-      Width = 49
-      Height = 21
-      Cursor = crIBeam
-      TabOrder = 2
-    end
-    object edt_socio: TMaskEdit
-      Left = 448
-      Top = 28
-      Width = 209
-      Height = 21
-      Cursor = crIBeam
-      Color = clInfoBk
-      Enabled = False
-      TabOrder = 3
-    end
-    object btn_socio: TBitBtn
-      Left = 664
+    object btn_Limpar: TBitBtn
+      Left = 720
       Top = 24
-      Width = 33
+      Width = 75
       Height = 25
-      TabOrder = 4
-      OnClick = btn_socioClick
+      Cursor = crHandPoint
+      Caption = 'Limpar'
+      TabOrder = 2
+      OnClick = btn_LimparClick
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333000000000
+        3333333777777777F3333330F777777033333337F3F3F3F7F3333330F0808070
+        33333337F7F7F7F7F3333330F080707033333337F7F7F7F7F3333330F0808070
+        33333337F7F7F7F7F3333330F080707033333337F7F7F7F7F3333330F0808070
+        333333F7F7F7F7F7F3F33030F080707030333737F7F7F7F7F7333300F0808070
+        03333377F7F7F7F773333330F080707033333337F7F7F7F7F333333070707070
+        33333337F7F7F7F7FF3333000000000003333377777777777F33330F88877777
+        0333337FFFFFFFFF7F3333000000000003333377777777777333333330777033
+        3333333337FFF7F3333333333000003333333333377777333333}
+      NumGlyphs = 2
+    end
+    object btn_pesqusiar: TBitBtn
+      Left = 632
+      Top = 24
+      Width = 75
+      Height = 25
+      Cursor = crHandPoint
+      Caption = 'Pesquisar'
+      TabOrder = 3
+      OnClick = btn_pesqusiarClick
       Glyph.Data = {
         76010000424D7601000000000000760000002800000020000000100000000100
         04000000000000010000130B0000130B00001000000000000000000000000000
         800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
         FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
-        33333333FF33333333FF333993333333300033377F3333333777333993333333
-        300033F77FFF3333377739999993333333333777777F3333333F399999933333
-        33003777777333333377333993333333330033377F3333333377333993333333
-        3333333773333333333F333333333333330033333333F33333773333333C3333
-        330033333337FF3333773333333CC333333333FFFFF77FFF3FF33CCCCCCCCCC3
-        993337777777777F77F33CCCCCCCCCC3993337777777777377333333333CC333
-        333333333337733333FF3333333C333330003333333733333777333333333333
-        3000333333333333377733333333333333333333333333333333}
+        33033333333333333F7F3333333333333000333333333333F777333333333333
+        000333333333333F777333333333333000333333333333F77733333333333300
+        033333333FFF3F777333333700073B703333333F7773F77733333307777700B3
+        33333377333777733333307F8F8F7033333337F333F337F3333377F8F9F8F773
+        3333373337F3373F3333078F898F870333337F33F7FFF37F333307F99999F703
+        33337F377777337F3333078F898F8703333373F337F33373333377F8F9F8F773
+        333337F3373337F33333307F8F8F70333333373FF333F7333333330777770333
+        333333773FF77333333333370007333333333333777333333333}
       NumGlyphs = 2
     end
   end
-  object ds_dependendias: TDataSource
-    DataSet = adoquery_dependentes
-    Left = 704
-    Top = 65520
-  end
-  object adoquery_dependentes: TADOQuery
-    Connection = fDataModule.conexaoDB
-    Parameters = <>
-    Left = 672
-    Top = 65520
+  object pnlContent: TPanel
+    Left = 0
+    Top = 65
+    Width = 806
+    Height = 281
+    Align = alClient
+    TabOrder = 2
+    object grid_dependencias: TDBGrid
+      Left = 1
+      Top = 1
+      Width = 804
+      Height = 279
+      Align = alClient
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = []
+      OnCellClick = grid_dependenciasCellClick
+    end
   end
   object adoquery_aux: TADOQuery
     Connection = fDataModule.conexaoDB
     Parameters = <>
-    Left = 632
+    Left = 616
+  end
+  object adoquery_dependentes: TADOQuery
+    Connection = fDataModule.conexaoDB
+    Parameters = <>
+    Left = 656
+    Top = 65528
+  end
+  object ds_dependendias: TDataSource
+    DataSet = adoquery_dependentes
+    Left = 688
     Top = 65528
   end
 end

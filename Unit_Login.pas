@@ -106,7 +106,7 @@ begin
   else
     begin
       senha := adoquery_login.fieldbyname('senha').AsString;
-        if edt_senha.Text <> descriptografa(senha) then
+        if edt_senha.Text <> senha then
           begin
             ShowMessage('Senha Incorreta');
             Result := false;

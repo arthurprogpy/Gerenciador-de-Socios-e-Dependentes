@@ -1,6 +1,6 @@
 object fLogin: TfLogin
-  Left = 512
-  Top = 256
+  Left = 532
+  Top = 257
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Login'
@@ -323,7 +323,7 @@ object fLogin: TfLogin
     Height = 21
     Cursor = crIBeam
     TabOrder = 0
-    Text = 'adm'
+    Text = 'Arthur'
   end
   object edt_senha: TEdit
     Left = 40

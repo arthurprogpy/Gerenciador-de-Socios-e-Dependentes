@@ -8,20 +8,26 @@ uses
 
 type
   TfDependentes = class(TForm)
-    ds_dependendias: TDataSource;
-    adoquery_dependentes: TADOQuery;
-    adoquery_aux: TADOQuery;
-    grid_dependencias: TDBGrid;
-    edt_pesquisar: TMaskEdit;
-    Label4: TLabel;
-    btn_pesqusiar: TBitBtn;
-    btn_Limpar: TBitBtn;
-    cbSociosOuDependente: TComboBox;
-    Label5: TLabel;
     pnlRodape: TPanel;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    edt_nome: TEdit;
+    edt_idade: TEdit;
+    edt_socio: TMaskEdit;
+    btn_socio: TBitBtn;
+    pnlTop: TPanel;
+    cbSociosOuDependente: TComboBox;
+    edt_pesquisar: TMaskEdit;
+    btn_Limpar: TBitBtn;
+    btn_pesqusiar: TBitBtn;
+    Label5: TLabel;
+    Label4: TLabel;
+    pnlContent: TPanel;
+    adoquery_aux: TADOQuery;
+    adoquery_dependentes: TADOQuery;
+    ds_dependendias: TDataSource;
+    grid_dependencias: TDBGrid;
     pnl_botoes: TPanel;
     btn_novo: TBitBtn;
     btn_editar: TBitBtn;
@@ -29,10 +35,6 @@ type
     btn_excluir: TBitBtn;
     btn_fechar: TBitBtn;
     btn_salvar: TBitBtn;
-    edt_nome: TEdit;
-    edt_idade: TEdit;
-    edt_socio: TMaskEdit;
-    btn_socio: TBitBtn;
     procedure bloqueia_campos;
     procedure libera_campos;
     procedure bloqueia_salvar(Sender: TObject);
