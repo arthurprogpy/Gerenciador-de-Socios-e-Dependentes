@@ -16,60 +16,16 @@ object FOperadores: TFOperadores
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object Usuario: TLabel
-    Left = 16
-    Top = 16
-    Width = 36
-    Height = 13
-    Caption = 'Usuario'
-  end
-  object Nome: TLabel
-    Left = 16
-    Top = 72
-    Width = 28
-    Height = 13
-    Caption = 'Nome'
-  end
-  object Senha: TLabel
-    Left = 168
-    Top = 16
-    Width = 31
-    Height = 13
-    Caption = 'Senha'
-  end
-  object edt_usuario: TEdit
-    Left = 16
-    Top = 32
-    Width = 137
-    Height = 21
-    Cursor = crIBeam
-    TabOrder = 0
-  end
-  object edt_nome: TEdit
-    Left = 16
-    Top = 88
-    Width = 385
-    Height = 21
-    Cursor = crIBeam
-    TabOrder = 2
-  end
-  object edt_senha: TEdit
-    Left = 168
-    Top = 32
-    Width = 169
-    Height = 21
-    Cursor = crIBeam
-    PasswordChar = '*'
-    TabOrder = 1
-  end
   object pnl_botoes: TPanel
-    Left = 8
-    Top = 128
-    Width = 537
+    Left = 0
+    Top = 145
+    Width = 551
     Height = 41
-    TabOrder = 3
+    Align = alBottom
+    Color = cl3DLight
+    TabOrder = 0
     object btn_novo: TBitBtn
-      Left = 187
+      Left = 190
       Top = 8
       Width = 75
       Height = 25
@@ -117,7 +73,7 @@ object FOperadores: TFOperadores
       NumGlyphs = 2
     end
     object btn_cancelar: TBitBtn
-      Left = 99
+      Left = 100
       Top = 8
       Width = 75
       Height = 25
@@ -141,7 +97,7 @@ object FOperadores: TFOperadores
       NumGlyphs = 2
     end
     object btn_excluir: TBitBtn
-      Left = 275
+      Left = 279
       Top = 8
       Width = 75
       Height = 25
@@ -164,7 +120,7 @@ object FOperadores: TFOperadores
       NumGlyphs = 2
     end
     object btn_fechar: TBitBtn
-      Left = 363
+      Left = 369
       Top = 8
       Width = 75
       Height = 25
@@ -197,6 +153,60 @@ object FOperadores: TFOperadores
         99337F3FF7F3733777F30F08F0F0337999337F7737F73F7777330FFFF0039999
         93337FFFF7737777733300000033333333337777773333333333}
       NumGlyphs = 2
+    end
+  end
+  object pnlClient: TPanel
+    Left = 0
+    Top = 0
+    Width = 551
+    Height = 145
+    Align = alClient
+    TabOrder = 1
+    object Usuario: TLabel
+      Left = 16
+      Top = 16
+      Width = 36
+      Height = 13
+      Caption = 'Usuario'
+    end
+    object Senha: TLabel
+      Left = 168
+      Top = 16
+      Width = 31
+      Height = 13
+      Caption = 'Senha'
+    end
+    object Nome: TLabel
+      Left = 16
+      Top = 72
+      Width = 28
+      Height = 13
+      Caption = 'Nome'
+    end
+    object edt_usuario: TEdit
+      Left = 16
+      Top = 32
+      Width = 137
+      Height = 21
+      Cursor = crIBeam
+      TabOrder = 0
+    end
+    object edt_senha: TEdit
+      Left = 168
+      Top = 32
+      Width = 169
+      Height = 21
+      Cursor = crIBeam
+      PasswordChar = '*'
+      TabOrder = 1
+    end
+    object edt_nome: TEdit
+      Left = 16
+      Top = 88
+      Width = 385
+      Height = 21
+      Cursor = crIBeam
+      TabOrder = 2
     end
   end
   object adoquery_operadores: TADOQuery

@@ -237,7 +237,7 @@ else if operacao = 'editar' then
       adoquery_aux.SQL.Text := 'UPDATE DEPENDENTES SET ' +
                               ' NOME = ' + QuotedStr(edt_nome.Text)+','+
                               ' IDADE = ' + QuotedStr(edt_idade.Text)+','+
-                              ' ID_SOCIO = ' + id_socio+
+                              ' ID_SOCIO = ' +pk_socio+
                               ' WHERE ID = '+ Id_dependente;
 
       fDataModule.conexaoDB.BeginTrans;

@@ -5,7 +5,7 @@ object FOperadores: TFOperadores
   BorderStyle = bsSingle
   Caption = 'Operadores'
   ClientHeight = 186
-  ClientWidth = 544
+  ClientWidth = 551
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -65,7 +65,7 @@ object FOperadores: TFOperadores
   object pnl_botoes: TPanel
     Left = 8
     Top = 128
-    Width = 529
+    Width = 537
     Height = 41
     TabOrder = 3
     object btn_novo: TBitBtn

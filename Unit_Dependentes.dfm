@@ -1,6 +1,6 @@
 object fDependentes: TfDependentes
-  Left = 440
-  Top = 175
+  Left = 419
+  Top = 162
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Dependentes'
@@ -90,7 +90,7 @@ object fDependentes: TfDependentes
       Left = 704
       Top = 16
       Width = 41
-      Height = 25
+      Height = 21
       MaxLength = 3
       TabOrder = 3
       OnKeyPress = edt_idadeKeyPress
