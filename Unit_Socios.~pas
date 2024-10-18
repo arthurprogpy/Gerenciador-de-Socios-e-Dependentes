@@ -8,27 +8,30 @@
 
   type
     TFSocios = class(TForm)
-      edt_nome: TEdit;
-      edt_renda: TEdit;
-      Label1: TLabel;
-      Label2: TLabel;
-      pnl_botoes: TPanel;
-      btn_novo: TBitBtn;
-      btn_editar: TBitBtn;
-      btn_cancelar: TBitBtn;
-      btn_excluir: TBitBtn;
-      btn_fechar: TBitBtn;
-      btn_salvar: TBitBtn;
-      adoquery_socios: TADOQuery;
-      DsSocios: TDataSource;
-      adoquery_aux: TADOQuery;
-      Label3: TLabel;
-      btn_pesquisa: TBitBtn;
-      edt_pesquisa: TMaskEdit;
-      btn_limmpar: TBitBtn;
-      RdInativo: TCheckBox;
-      RdStatus: TRadioGroup;
-      gridSocios: TDBGrid;
+    pnlTOp: TPanel;
+    Label3: TLabel;
+    btn_pesquisa: TBitBtn;
+    edt_pesquisa: TMaskEdit;
+    btn_limmpar: TBitBtn;
+    RdStatus: TRadioGroup;
+    adoquery_socios: TADOQuery;
+    DsSocios: TDataSource;
+    pnlBottom: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    edt_nome: TEdit;
+    edt_renda: TEdit;
+    pnl_botoes: TPanel;
+    btn_novo: TBitBtn;
+    btn_editar: TBitBtn;
+    btn_cancelar: TBitBtn;
+    btn_excluir: TBitBtn;
+    btn_fechar: TBitBtn;
+    btn_salvar: TBitBtn;
+    RdInativo: TCheckBox;
+    adoquery_aux: TADOQuery;
+    pnlClient: TPanel;
+    gridSocios: TDBGrid;
       procedure limpa_campos;
       procedure bloqueia_campos;
       procedure bloqueia_salvar(Sender : TObject);
@@ -46,6 +49,8 @@
       procedure btn_cancelarClick(Sender: TObject);
       procedure btn_excluirClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure edt_rendaChange(Sender: TObject);
+    procedure edt_rendaKeyPress(Sender: TObject; var Key: Char);
 
     private
       { Private declarations }
@@ -168,77 +173,50 @@
     libera_campos;
   end;
 
-  procedure TFSocios.btn_salvarClick(Sender: TObject);
-  var valorComparado : integer;
-  valorComparadoString: String;
-  comprimentoString, i: integer;
-  begin
-    if operacao = 'novo' then
-      begin
-        if (edt_nome.Text = '') or (edt_renda.Text = '') then
-          ShowMessage('Preencha todos os campos')
-        else
-          if Length(edt_nome.text) <= 4 then
-            ShowMessage('Digite pelo menos 5 caracteres no campo Nome !')
-          else // INICIO ELSE  PARA VERIFICAR A RENDA
-          begin
-            comprimentoString := length(edt_renda.Text);
-            for i := 1 to comprimentoString -1 do  //INICIO FOR PARA PERCORRER A STRING
+    procedure TFSocios.btn_salvarClick(Sender: TObject);
+    var valorComparado : integer;
+    valorComparadoString: String;
+    comprimentoString, i: integer;
+    LRenda: Double;
+    begin
+      if operacao = 'novo' then
+        begin
+          if (Trim(edt_nome.Text) = '') or (Trim(edt_renda.Text) = '') then
+            ShowMessage('Preencha todos os campos')
+          else
+            if Length(edt_nome.text) <= 4 then
+              ShowMessage('Digite pelo menos 5 caracteres no campo Nome !')
+            else // INICIO ELSE  PARA VERIFICAR A RENDA
+
+            adoquery_aux.SQL.Text := 'INSERT INTO SOCIOS VALUES('+
+                                              QuotedStr(edt_nome.text)+
+                                              ', :ativo,' +
+                                              edt_renda.Text + ')';
+
+            if RdInativo.Checked = false then // INICIO IF PARA VER SE O RDiNATIVO ESTA MARCADO
+              adoquery_aux.Parameters.ParamByName('ativo').Value := 'ATIVO'
+            else
             begin
-              if edt_renda.Text[i] = '.' then   // INICIO IF VERIFICAÇÃO '.'
-              begin
-                if i + 2 = comprimentoString then // INICIO IF VERIFICAÇÃO SE O PONTO ESTA A DOIS CARACTERES NO FINAL DA STRING
-                begin
-                  adoquery_aux.SQL.Text := 'INSERT INTO SOCIOS VALUES('+
-                                            QuotedStr(edt_nome.text)+
-                                            ', :ativo,' +
-                                            edt_renda.Text + ')';
+              adoquery_aux.Parameters.ParamByName('ativo').Value := 'INATIVO'
+            end;  // FIM IF PARA VER SE O RDiNATIVO ESTA MARCADO
 
-                  if RdInativo.Checked = false then // INICIO IF PARA VER SE O RDiNATIVO ESTA MARCADO
-                    adoquery_aux.Parameters.ParamByName('ativo').Value := 'ATIVO'
-                  else
-                  begin
-                    adoquery_aux.Parameters.ParamByName('ativo').Value := 'INATIVO'
-                  end;  // FIM IF PARA VER SE O RDiNATIVO ESTA MARCADO
+            fDataModule.conexaoDB.BeginTrans;
+            try
+              adoquery_aux.ExecSQL;
+              fDataModule.conexaoDB.CommitTrans;
+            except
+            on E : exception do
+              ShowMessage('Erro ao inserir: '+ E.message);
+            end;
 
-                  fDataModule.conexaoDB.BeginTrans;
-                  try
-                    adoquery_aux.ExecSQL;
-                    fDataModule.conexaoDB.CommitTrans;;
-                  except
-                  on E : exception do
-                    ShowMessage('Erro ao inserir: '+ E.message);
-                  end;
+            ShowMessage('Usuario Inserido com Sucesso !');
+            adoquery_socios.Close;;
+            adoquery_socios.open;
 
-                  ShowMessage('Usuario Inserido com Sucesso !');
-                  adoquery_socios.Close;;
-                  adoquery_socios.open;
-
-                  limpa_campos;
-                  bloqueia_salvar(Sender);
-                  bloqueia_campos;
-                  break;
-                end
-              else if i + 2 < comprimentoString then
-              begin
-                ShowMessage('Insira no formato Monetario sem separadores de milhar. Ex: 100.90');
-                break;
-              end // FIM IF VERIFICAÇÃO SE O PONTO ESTA A DOIS CARACTERES NO FINAL DA STRING
-              else if i + 2 > comprimentoString then
-              begin
-                ShowMessage('Insira duas casas decimais apos o ponto. Ex: 100.90');
-                break;
-              end;
-            end
-          else if edt_renda.Text[i] = ',' then
-          begin
-            ShowMessage('Utilize ponto no lugar da virgula. Ex: 100.90');
-            break;
-          end;
-        end; // FIM FOR PARA PERCORRER A STRING
-    end; // FIM ELSE PARA VERIFICAR A RENDA
-  end // FIM IF OPERACAO = NOVO
-
+            limpa_campos;
+            bloqueia_salvar(Sender);
+            bloqueia_campos;
+        end
   else if operacao = 'editar' then
   begin
 
@@ -328,7 +306,7 @@
   begin
     edt_nome.Text := adoquery_socios.fieldbyname('nome').AsString;
     renda := adoquery_socios.fieldbyname('renda').AsString;
-    edt_renda.Text := StringReplace(renda, ',','.',[rfreplaceall]);
+    edt_renda.Text := FormatFloat('0.00', adoquery_socios.fieldbyname('renda').AsCurrency);
     nome := adoquery_socios.fieldbyname('nome').AsString;
     chave := adoquery_socios.Fields.Fields[0].AsString;
 
@@ -350,22 +328,24 @@
 
   procedure TFSocios.btn_pesquisaClick(Sender: TObject);
   begin
-    if edt_pesquisa.Text = '' then
-      ShowMessage('Impossivel Pesquisar !')
-    else
-    if RdStatus.ItemIndex = 0 then
+    if (RdStatus.ItemIndex = 0) and (Trim(edt_pesquisa.Text) = '') then
+      begin
+        adoquery_socios.SQL.Text := 'SELECT * FROM SOCIOS WHERE ATIVO = '+QuotedStr('ATIVO');
+      end
+    else if (RdStatus.ItemIndex = 1) and (Trim(edt_pesquisa.Text) = '') then
+      begin
+        adoquery_socios.SQL.Text := 'SELECT * FROM SOCIOS WHERE ATIVO = '+QuotedStr('INATIVO');
+      end
+    else if (RdStatus.ItemIndex = 0) and (Trim(edt_pesquisa.Text) <> '') then
+       begin
        adoquery_socios.SQL.Text := 'SELECT * FROM SOCIOS WHERE NOME LIKE ' + QuotedStr(edt_pesquisa.Text+'%') +
                                     'AND ATIVO = '+QuotedStr('ATIVO')
-    else if RdStatus.ItemIndex = 1 then
-    begin
-           adoquery_socios.SQL.Text := 'SELECT * FROM SOCIOS WHERE NOME LIKE ' + QuotedStr(edt_pesquisa.Text+'%') +
+       end
+    else if (RdStatus.ItemIndex = 1) and (Trim(edt_pesquisa.Text) <> '') then
+      begin
+        adoquery_socios.SQL.Text := 'SELECT * FROM SOCIOS WHERE NOME LIKE ' + QuotedStr(edt_pesquisa.Text+'%') +
                                     'AND ATIVO = '+QuotedStr('INATIVO')
-    end
-    else
-    begin
-      adoquery_socios.SQL.Text := 'SELECT * FROM SOCIOS WHERE NOME LIKE ' +
-                                  QuotedStr(edt_pesquisa.Text+'%');
-    end;
+      end;
     adoquery_socios.Close;
     adoquery_socios.Open;
   end;
@@ -390,12 +370,12 @@
   procedure TFSocios.btn_excluirClick(Sender: TObject);
   begin
     if chave = '' then
-      ShowMessage('Impossivel Selecionar !')
+      ShowMessage('Impossivel Excluir !')
     else
       begin
-        resposta := MessageDlg('Caso você exclua um socio você automaticamente'+
+        resposta := MessageDlg('Caso você exclua um socio você automaticamente '+
                       'remove todos os dependentes atrelados a ele.'+
-                       'Tem certeza que deseja excluir ?', mtConfirmation, [mbYes, mbCancel],0);
+                       ' Tem certeza que deseja excluir ?', mtConfirmation, [mbYes, mbCancel],0);
 
         if resposta = mRyes then
           begin
@@ -406,6 +386,7 @@
             on E : exception do
               ShowMessage('Erro: '+E.Message);
             end;
+
             adoquery_aux.SQL.text := 'DELETE FROM SOCIOS WHERE ID = '+chave;
             try
             adoquery_aux.ExecSQL;
@@ -416,6 +397,7 @@
             adoquery_socios.Close;
             adoquery_socios.Open;
             limpa_campos;
+            chave := '';
             end;
           end;
       end;
@@ -424,6 +406,20 @@
   procedure TFSocios.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   chave := '';
+end;
+
+procedure TFSocios.edt_rendaChange(Sender: TObject);
+begin
+  edt_renda.Text := StringReplace(edt_renda.Text, ',', '.', []);
+  edt_renda.SelStart := Length(edt_renda.Text);
+end;
+
+procedure TFSocios.edt_rendaKeyPress(Sender: TObject; var Key: Char);
+begin
+if not (Key in ['0'..'9', ',', #8]) then
+begin
+  Key := #0;
+end;
 end;
 
 end.

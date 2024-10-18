@@ -66,7 +66,6 @@ else
   end;
 end;
 
-
 procedure TFPesquisa.btn_fecharClick(Sender: TObject);
 begin
   close;

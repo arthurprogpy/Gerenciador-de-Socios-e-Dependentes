@@ -1,6 +1,6 @@
 object fDependentes: TfDependentes
-  Left = 292
-  Top = 155
+  Left = 440
+  Top = 175
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Dependentes'
@@ -26,58 +26,50 @@ object fDependentes: TfDependentes
     TabOrder = 0
     object Label1: TLabel
       Left = 64
-      Top = 12
+      Top = 4
       Width = 28
       Height = 13
       Caption = 'Nome'
     end
     object Label2: TLabel
       Left = 702
-      Top = 12
+      Top = 4
       Width = 27
       Height = 13
       Caption = 'Idade'
     end
     object Label3: TLabel
       Left = 448
-      Top = 12
+      Top = 4
       Width = 27
       Height = 13
       Caption = 'Socio'
     end
     object edt_nome: TEdit
       Left = 64
-      Top = 28
+      Top = 20
       Width = 369
       Height = 21
       Cursor = crIBeam
       MaxLength = 50
       TabOrder = 0
     end
-    object edt_idade: TEdit
-      Left = 704
-      Top = 28
-      Width = 49
-      Height = 21
-      Cursor = crIBeam
-      TabOrder = 1
-    end
     object edt_socio: TMaskEdit
       Left = 448
-      Top = 28
+      Top = 20
       Width = 209
       Height = 21
       Cursor = crIBeam
       Color = clInfoBk
       Enabled = False
-      TabOrder = 2
+      TabOrder = 1
     end
     object btn_socio: TBitBtn
       Left = 664
-      Top = 24
+      Top = 16
       Width = 33
       Height = 25
-      TabOrder = 3
+      TabOrder = 2
       OnClick = btn_socioClick
       Glyph.Data = {
         76010000424D7601000000000000760000002800000020000000100000000100
@@ -94,20 +86,30 @@ object fDependentes: TfDependentes
         3000333333333333377733333333333333333333333333333333}
       NumGlyphs = 2
     end
+    object edt_idade: TEdit
+      Left = 704
+      Top = 16
+      Width = 41
+      Height = 25
+      MaxLength = 3
+      TabOrder = 3
+      OnKeyPress = edt_idadeKeyPress
+    end
     object pnl_botoes: TPanel
-      Left = 176
-      Top = 56
-      Width = 425
+      Left = 64
+      Top = 47
+      Width = 681
       Height = 41
       TabOrder = 4
       object btn_novo: TBitBtn
-        Left = -8
+        Left = 11
         Top = 8
         Width = 75
         Height = 25
         Cursor = crHandPoint
         Caption = 'Novo'
         TabOrder = 0
+        OnClick = btn_novoClick
         Glyph.Data = {
           76010000424D7601000000000000760000002800000020000000100000000100
           04000000000000010000130B0000130B00001000000000000000000000000000
@@ -124,13 +126,14 @@ object fDependentes: TfDependentes
         NumGlyphs = 2
       end
       object btn_editar: TBitBtn
-        Left = 136
+        Left = 244
         Top = 8
         Width = 75
         Height = 25
         Cursor = crHandPoint
         Caption = 'Editar'
         TabOrder = 1
+        OnClick = btn_editarClick
         Glyph.Data = {
           76010000424D7601000000000000760000002800000020000000100000000100
           04000000000000010000120B0000120B00001000000000000000000000000000
@@ -147,7 +150,7 @@ object fDependentes: TfDependentes
         NumGlyphs = 2
       end
       object btn_cancelar: TBitBtn
-        Left = 208
+        Left = 361
         Top = 8
         Width = 75
         Height = 25
@@ -170,13 +173,14 @@ object fDependentes: TfDependentes
         NumGlyphs = 2
       end
       object btn_excluir: TBitBtn
-        Left = 280
+        Left = 478
         Top = 8
         Width = 75
         Height = 25
         Cursor = crHandPoint
         Caption = 'Excluir'
         TabOrder = 3
+        OnClick = btn_excluirClick
         Glyph.Data = {
           76010000424D7601000000000000760000002800000020000000100000000100
           04000000000000010000120B0000120B00001000000000000000000000000000
@@ -193,7 +197,7 @@ object fDependentes: TfDependentes
         NumGlyphs = 2
       end
       object btn_fechar: TBitBtn
-        Left = 352
+        Left = 595
         Top = 8
         Width = 75
         Height = 25
@@ -203,13 +207,14 @@ object fDependentes: TfDependentes
         Kind = bkCancel
       end
       object btn_salvar: TBitBtn
-        Left = 64
+        Left = 127
         Top = 8
         Width = 75
         Height = 25
         Cursor = crHandPoint
         Caption = 'Salvar'
         TabOrder = 5
+        OnClick = btn_salvarClick
         Glyph.Data = {
           76010000424D7601000000000000760000002800000020000000100000000100
           04000000000000010000130B0000130B00001000000000000000000000000000
@@ -254,6 +259,7 @@ object fDependentes: TfDependentes
       Top = 28
       Width = 97
       Height = 21
+      Style = csDropDownList
       ItemHeight = 13
       ItemIndex = 1
       TabOrder = 0
@@ -332,6 +338,7 @@ object fDependentes: TfDependentes
       Width = 804
       Height = 279
       Align = alClient
+      DataSource = ds_dependendias
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET

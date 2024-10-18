@@ -13,7 +13,6 @@ type
     Label2: TLabel;
     Label3: TLabel;
     edt_nome: TEdit;
-    edt_idade: TEdit;
     edt_socio: TMaskEdit;
     btn_socio: TBitBtn;
     pnlTop: TPanel;
@@ -28,6 +27,7 @@ type
     adoquery_dependentes: TADOQuery;
     ds_dependendias: TDataSource;
     grid_dependencias: TDBGrid;
+    edt_idade: TEdit;
     pnl_botoes: TPanel;
     btn_novo: TBitBtn;
     btn_editar: TBitBtn;
@@ -51,6 +51,7 @@ type
     procedure btn_pesqusiarClick(Sender: TObject);
     procedure btn_LimparClick(Sender: TObject);
     procedure btn_fecharClick(Sender: TObject);
+    procedure edt_idadeKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -77,6 +78,8 @@ begin
           (fDependentes.Components[i] as TEdit).Enabled := false;
           (fDependentes.Components[i] as TEdit).color := clinfobk;
           btn_socio.Enabled := false;
+          edt_idade.Enabled := False;
+          edt_idade.Color := clInfoBk;
         end;
     end;
 end;
@@ -111,6 +114,9 @@ begin
           (fDependentes.Components[i] as TEdit).Enabled := true;
           (fDependentes.Components[i] as TEdit).color := clwhite;
           btn_socio.Enabled := true;
+
+          edt_idade.Enabled := true;
+          edt_idade.Color := clwhite;
         end;
     end;
 end;
@@ -144,6 +150,7 @@ begin
         begin
           (FDependentes.Components[i] as TEdit).Clear;
           edt_socio.Clear;
+          edt_idade.Clear;
         end;
     end;
 end;
@@ -162,6 +169,7 @@ begin
   bloqueia_salvar(Sender);
   limpa_campos;
 
+
  adoquery_dependentes.SQL.Text := 'SELECT dependentes.ID AS ' + QuotedStr('ID DEPENDENTE')+','+
                                   ' Dependentes.nome AS '+QuotedStr('NOME DEPENDENTE')+',' +
                                   ' Dependentes.idade AS IDADE,'+
@@ -172,7 +180,9 @@ begin
                                   '  ON dependentes.id_socio = socios.id'+
                                   ' WHERE SOCIOS.ATIVO = '+QuotedStr('ATIVO');
 
+  adoquery_dependentes.Close;
   adoquery_dependentes.open;
+
   Id_dependente := '';
 end;
 
@@ -227,7 +237,7 @@ else if operacao = 'editar' then
       adoquery_aux.SQL.Text := 'UPDATE DEPENDENTES SET ' +
                               ' NOME = ' + QuotedStr(edt_nome.Text)+','+
                               ' IDADE = ' + QuotedStr(edt_idade.Text)+','+
-                              ' ID_SOCIO = ' + pk_socio+
+                              ' ID_SOCIO = ' + id_socio+
                               ' WHERE ID = '+ Id_dependente;
 
       fDataModule.conexaoDB.BeginTrans;
@@ -309,6 +319,7 @@ begin
         adoquery_dependentes.close;
         adoquery_dependentes.open;
         limpa_campos;
+        Id_dependente := '';
   end;
 end;
 
@@ -363,6 +374,12 @@ end;
 procedure TfDependentes.btn_fecharClick(Sender: TObject);
 begin
   close;
+end;
+
+procedure TfDependentes.edt_idadeKeyPress(Sender: TObject; var Key: Char);
+begin
+  if not (Key in ['0'..'9', #8]) then
+    Key := #0;
 end;
 
 end.

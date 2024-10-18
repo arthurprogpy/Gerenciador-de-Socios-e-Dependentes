@@ -1,6 +1,6 @@
 object FPesquisa: TFPesquisa
-  Left = 538
-  Top = 163
+  Left = 519
+  Top = 164
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Pesquisa'
