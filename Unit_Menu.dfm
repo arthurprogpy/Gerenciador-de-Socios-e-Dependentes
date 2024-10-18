@@ -5,7 +5,7 @@ object fMenu: TfMenu
   BorderStyle = bsSingle
   Caption = 'Menu'
   ClientHeight = 289
-  ClientWidth = 566
+  ClientWidth = 569
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object fMenu: TfMenu
   object pnlBottom: TPanel
     Left = 0
     Top = 208
-    Width = 566
+    Width = 569
     Height = 81
     Align = alBottom
     TabOrder = 0
@@ -161,20 +161,18 @@ object fMenu: TfMenu
       Kind = bkCancel
     end
   end
-  object pnlLogo: TPanel
+  object pnlTop: TPanel
     Left = 0
     Top = 0
-    Width = 566
+    Width = 569
     Height = 57
     Align = alTop
     TabOrder = 1
-    TabStop = True
-    object imgLOgo: TImage
-      Left = 502
-      Top = 1
-      Width = 63
-      Height = 55
-      Align = alRight
+    object imglogo: TImage
+      Left = 504
+      Top = 0
+      Width = 65
+      Height = 57
       Picture.Data = {
         0A544A504547496D61676516D30000FFD8FFE000104A46494600010100000100
         010000FFFE001F436F6D70726573736564206279206A7065672D7265636F6D70
@@ -1868,38 +1866,10 @@ object fMenu: TfMenu
         00670FFFD9}
       Stretch = True
     end
-  end
-  object pnlClient: TPanel
-    Left = 0
-    Top = 57
-    Width = 566
-    Height = 151
-    Align = alClient
-    TabOrder = 2
-    object lbl: TLabel
-      Left = 72
-      Top = 64
-      Width = 444
-      Height = 25
-      Caption = 'Gerenciador De S'#243'cios e Dependentes'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -21
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-  end
-  object pnlTop: TPanel
-    Left = 0
-    Top = 0
-    Width = 497
-    Height = 57
-    TabOrder = 3
     object statBarMenu: TStatusBar
       Left = 1
       Top = 7
-      Width = 562
+      Width = 504
       Height = 49
       Align = alNone
       Panels = <
@@ -1920,6 +1890,27 @@ object fMenu: TfMenu
           Text = 'HORA'
           Width = 50
         end>
+    end
+  end
+  object pnlClient: TPanel
+    Left = 0
+    Top = 57
+    Width = 569
+    Height = 151
+    Align = alClient
+    TabOrder = 2
+    object lbl: TLabel
+      Left = 128
+      Top = 48
+      Width = 300
+      Height = 29
+      Caption = 'Gerenciador De S'#243'cios'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -24
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
   end
   object tmr1: TTimer

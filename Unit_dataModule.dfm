@@ -5,6 +5,7 @@ object fDataModule: TfDataModule
   Height = 150
   Width = 215
   object conexaoDB: TADOConnection
+    Connected = True
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
     Left = 80

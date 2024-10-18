@@ -32,6 +32,10 @@
     adoquery_aux: TADOQuery;
     pnlClient: TPanel;
     gridSocios: TDBGrid;
+    adoquery_sociosID: TAutoIncField;
+    adoquery_sociosNOME: TStringField;
+    adoquery_sociosRENDA: TBCDField;
+    adoquery_sociosATIVO: TStringField;
       procedure limpa_campos;
       procedure bloqueia_campos;
       procedure bloqueia_salvar(Sender : TObject);

@@ -1,6 +1,6 @@
 object FSocios: TFSocios
-  Left = 467
-  Top = 268
+  Left = 439
+  Top = 276
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Socios'
@@ -315,12 +315,31 @@ object FSocios: TFSocios
     end
   end
   object adoquery_socios: TADOQuery
+    AutoCalcFields = False
     Connection = fDataModule.conexaoDB
+    CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
       '')
     Left = 696
     Top = 16
+    object adoquery_sociosID: TAutoIncField
+      FieldName = 'ID'
+      ReadOnly = True
+    end
+    object adoquery_sociosNOME: TStringField
+      FieldName = 'NOME'
+      Size = 50
+    end
+    object adoquery_sociosRENDA: TBCDField
+      FieldName = 'RENDA'
+      DisplayFormat = ',0.00'
+      Precision = 19
+    end
+    object adoquery_sociosATIVO: TStringField
+      FieldName = 'ATIVO'
+      Size = 7
+    end
   end
   object DsSocios: TDataSource
     DataSet = adoquery_socios

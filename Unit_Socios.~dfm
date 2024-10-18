@@ -1,6 +1,6 @@
 object FSocios: TFSocios
-  Left = 462
-  Top = 252
+  Left = 467
+  Top = 268
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Socios'

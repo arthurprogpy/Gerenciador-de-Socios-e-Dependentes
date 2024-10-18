@@ -15,12 +15,11 @@ type
     btn_operadores: TBitBtn;
     btn_fechar: TBitBtn;
     tmr1: TTimer;
-    pnlLogo: TPanel;
-    imgLOgo: TImage;
-    pnlClient: TPanel;
-    lbl: TLabel;
     pnlTop: TPanel;
     statBarMenu: TStatusBar;
+    imglogo: TImage;
+    pnlClient: TPanel;
+    lbl: TLabel;
     procedure btn_fecharClick(Sender: TObject);
     procedure btn_sociosClick(Sender: TObject);
     procedure btn_operadoresClick(Sender: TObject);
