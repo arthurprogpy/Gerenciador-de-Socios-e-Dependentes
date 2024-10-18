@@ -4,17 +4,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, Grids, DBGrids, DB, ADODB;
+  Dialogs, StdCtrls, Buttons, Grids, DBGrids, DB, ADODB, ExtCtrls;
 
 type
   TfSelecionaSocio = class(TForm)
-    edt_nome_socio: TEdit;
-    btn_gerar_relatorio: TBitBtn;
-    Label1: TLabel;
     DsRelatorio: TDataSource;
     adoquey_relatorio: TADOQuery;
-    grid_relatorio: TDBGrid;
-    btn_fechar: TBitBtn;
     adoquery_aux: TADOQuery;
     DsAuxiliar: TDataSource;
     adoquery_auxIDDEPENDENTE: TAutoIncField;
@@ -22,6 +17,13 @@ type
     adoquery_auxIDADE: TIntegerField;
     adoquery_auxIDSOCIO: TAutoIncField;
     adoquery_auxNOMEDOSOCIO: TStringField;
+    pnlClient: TPanel;
+    pnlBootom: TPanel;
+    edt_nome_socio: TEdit;
+    Label1: TLabel;
+    btn_gerar_relatorio: TBitBtn;
+    btn_fechar: TBitBtn;
+    grid_relatorio: TDBGrid;
     procedure btn_pesquisar_socioClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure grid_relatorioCellClick(Column: TColumn);

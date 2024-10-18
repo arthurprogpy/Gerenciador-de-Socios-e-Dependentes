@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, DBGrids, ExtCtrls, ComCtrls;
+  Dialogs, StdCtrls, Buttons, DBGrids, ExtCtrls, ComCtrls, jpeg;
 
 type
   TfMenu = class(TForm)
@@ -14,11 +14,13 @@ type
     btn_relatorios: TBitBtn;
     btn_operadores: TBitBtn;
     btn_fechar: TBitBtn;
-    statBarMenu: TStatusBar;
     tmr1: TTimer;
-    lbl: TLabel;
     pnlLogo: TPanel;
     imgLOgo: TImage;
+    pnlClient: TPanel;
+    lbl: TLabel;
+    pnlTop: TPanel;
+    statBarMenu: TStatusBar;
     procedure btn_fecharClick(Sender: TObject);
     procedure btn_sociosClick(Sender: TObject);
     procedure btn_operadoresClick(Sender: TObject);
