@@ -47,7 +47,7 @@ end;
 
 procedure TfLogin.btn_entrarClick(Sender: TObject);
 begin
-  if (edt_usuario.Text = '') or (edt_senha.Text = '') then
+  if (trim(edt_usuario.Text) = '') or (trim(edt_senha.Text) = '') then
     begin
       ShowMessage('Preencha todos os campos !');
     end
@@ -105,7 +105,7 @@ begin
     end
   else
     begin
-      senha := adoquery_login.fieldbyname('senha').AsString;
+      senha := descriptografa(adoquery_login.fieldbyname('senha').AsString);
         if edt_senha.Text <> senha then
           begin
             ShowMessage('Senha Incorreta');

@@ -8,14 +8,15 @@ uses
 
 type
   TFOperadores = class(TForm)
-    edt_usuario: TEdit;
-    edt_nome: TEdit;
-    edt_senha: TEdit;
-    Usuario: TLabel;
-    Nome: TLabel;
-    Senha: TLabel;
     adoquery_operadores: TADOQuery;
-    pnl_botoes: TPanel;
+    pnlClient: TPanel;
+    Usuario: TLabel;
+    edt_usuario: TEdit;
+    Senha: TLabel;
+    edt_senha: TEdit;
+    edt_nome: TEdit;
+    Nome: TLabel;
+    Panel1: TPanel;
     btn_novo: TBitBtn;
     btn_editar: TBitBtn;
     btn_cancelar: TBitBtn;
@@ -169,9 +170,9 @@ begin
                                             ' VALUES(' +
                                             QuotedStr(edt_usuario.Text)+','+
                                             QuotedStr(edt_nome.Text)+','+
-                                            QuotedStr(edt_senha.Text)+')';
+                                            fLogin.criptografa(QuotedStr(edt_senha.Text))+')';
 
-            adoquery_operadores.ExecSQL;
+          adoquery_operadores.ExecSQL;
            fDataModule.conexaoDB.CommitTrans;
            
           bloqueia_campos;

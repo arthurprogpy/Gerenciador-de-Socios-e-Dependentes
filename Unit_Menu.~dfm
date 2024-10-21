@@ -1876,13 +1876,16 @@ object fMenu: TfMenu
         item
           Alignment = taCenter
           Bevel = pbNone
+          BiDiMode = bdRightToLeftNoAlign
+          ParentBiDiMode = False
           Text = 'USUARIO'
-          Width = 270
+          Width = 200
         end
         item
+          Alignment = taCenter
           Bevel = pbNone
           Text = 'DATA'
-          Width = 50
+          Width = 150
         end
         item
           Alignment = taCenter
