@@ -139,7 +139,7 @@ object FSocios: TFSocios
       Width = 121
       Height = 21
       Cursor = crIBeam
-      MaxLength = 6
+      MaxLength = 8
       TabOrder = 1
       OnChange = edt_rendaChange
       OnKeyPress = edt_rendaKeyPress

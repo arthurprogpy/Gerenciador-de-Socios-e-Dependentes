@@ -50,6 +50,7 @@ object FOperadores: TFOperadores
       Width = 137
       Height = 21
       Cursor = crIBeam
+      MaxLength = 50
       TabOrder = 0
     end
     object edt_senha: TEdit
@@ -58,6 +59,7 @@ object FOperadores: TFOperadores
       Width = 169
       Height = 21
       Cursor = crIBeam
+      MaxLength = 50
       PasswordChar = '*'
       TabOrder = 1
     end
@@ -67,6 +69,7 @@ object FOperadores: TFOperadores
       Width = 385
       Height = 21
       Cursor = crIBeam
+      MaxLength = 50
       TabOrder = 2
     end
     object Panel1: TPanel

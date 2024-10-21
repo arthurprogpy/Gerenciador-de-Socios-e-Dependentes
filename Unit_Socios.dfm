@@ -334,7 +334,7 @@ object FSocios: TFSocios
     end
     object adoquery_sociosRENDA: TBCDField
       FieldName = 'RENDA'
-      DisplayFormat = ',0.00'
+      DisplayFormat = 'R$ ,0.00'
       Precision = 19
     end
     object adoquery_sociosATIVO: TStringField
