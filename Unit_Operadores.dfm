@@ -78,6 +78,7 @@ object FOperadores: TFOperadores
       Width = 549
       Height = 41
       Align = alBottom
+      Color = cl3DLight
       TabOrder = 3
       object btn_novo: TBitBtn
         Left = 19
