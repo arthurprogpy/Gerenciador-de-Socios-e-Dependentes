@@ -70,7 +70,7 @@ object FOperadores: TFOperadores
       Height = 21
       Cursor = crIBeam
       MaxLength = 50
-      TabOrder = 2
+      TabOrder = 3
     end
     object Panel1: TPanel
       Left = 1
@@ -79,7 +79,7 @@ object FOperadores: TFOperadores
       Height = 41
       Align = alBottom
       Color = cl3DLight
-      TabOrder = 3
+      TabOrder = 2
       object btn_novo: TBitBtn
         Left = 19
         Top = 8
