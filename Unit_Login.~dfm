@@ -323,7 +323,7 @@ object fLogin: TfLogin
     Height = 21
     Cursor = crIBeam
     TabOrder = 0
-    Text = 'Arthur'
+    Text = 'adm'
   end
   object edt_senha: TEdit
     Left = 40

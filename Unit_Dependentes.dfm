@@ -23,7 +23,7 @@ object fDependentes: TfDependentes
     Height = 97
     Align = alBottom
     Color = cl3DLight
-    TabOrder = 0
+    TabOrder = 1
     object Label1: TLabel
       Left = 64
       Top = 4
@@ -239,7 +239,7 @@ object fDependentes: TfDependentes
     Height = 65
     Align = alTop
     Color = cl3DLight
-    TabOrder = 1
+    TabOrder = 0
     object Label5: TLabel
       Left = 8
       Top = 12
