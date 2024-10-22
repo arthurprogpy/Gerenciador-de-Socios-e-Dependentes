@@ -367,6 +367,15 @@ procedure TfDependentes.btn_LimparClick(Sender: TObject);
 begin
   edt_pesquisar.clear;
   adoquery_dependentes.Close;
+   adoquery_dependentes.SQL.Text := 'SELECT dependentes.ID AS ' + QuotedStr('ID DEPENDENTE')+','+
+                                  ' Dependentes.nome AS '+QuotedStr('NOME DEPENDENTE')+',' +
+                                  ' Dependentes.idade AS IDADE,'+
+                                  '  socios.id AS '+QuotedStr('ID SOCIO')+','+
+                                  ' socios.nome AS '+QuotedStr('NOME DO SOCIO')+
+                                  '  FROM dependentes '+
+                                  '  INNER JOIN socios '+
+                                  '  ON dependentes.id_socio = socios.id'+
+                                  ' WHERE SOCIOS.ATIVO = '+QuotedStr('ATIVO');
   adoquery_dependentes.open;
   Id_dependente := '';
 end;

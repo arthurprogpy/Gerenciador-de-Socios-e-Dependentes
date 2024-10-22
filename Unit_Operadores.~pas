@@ -158,50 +158,76 @@ end;
 
 procedure TFOperadores.btn_salvarClick(Sender: TObject);
 begin
-  if (edt_usuario.Text = '') or  (edt_senha.text = '') or (edt_nome.Text = '') then
+  if (Trim(edt_usuario.Text) = '') or  (Trim(edt_senha.text) = '') or (Trim(edt_nome.Text) = '')
+   then
     ShowMessage('Preencha todos os Campos !')
   else
     begin
       if operacao = 'novo' then
         begin
           fDataModule.conexaoDB.BeginTrans;
-          try
-            adoquery_operadores.SQL.Text := 'INSERT INTO OPERADORES(USUARIO, NOME, SENHA)' +
+
+            if cb_tipo.ItemIndex = 0 then
+              begin
+              adoquery_operadores.SQL.Text := 'INSERT INTO OPERADORES(USUARIO, NOME, SENHA, TIPO_ACESSO)' +
                                             ' VALUES(' +
                                             QuotedStr(edt_usuario.Text)+','+
                                             QuotedStr(edt_nome.Text)+','+
-                                            fLogin.criptografa(QuotedStr(edt_senha.Text))+')';
+                                            QuotedStr(FLogin.criptografa(edt_senha.Text))+','+
+                                            QuotedStr('0')+')';
+              end
+            else if cb_tipo.ItemIndex = 1 then
+              begin
+              adoquery_operadores.SQL.Text := 'INSERT INTO OPERADORES(USUARIO, NOME, SENHA, TIPO_ACESSO)' +
+                                            ' VALUES(' +
+                                            QuotedStr(edt_usuario.Text)+','+
+                                            QuotedStr(edt_nome.Text)+','+
+                                            QuotedStr(FLogin.criptografa(edt_senha.Text))+','+
+                                            QuotedStr('3')+')';
+              end;
 
+          try
           adoquery_operadores.ExecSQL;
            fDataModule.conexaoDB.CommitTrans;
-           
-          bloqueia_campos;
-          bloqueia_salvar(Sender);
-
           except
           on E : exception do
             ShowMessage('Erro: ' + E.message);
           end;
+
+          bloqueia_campos;
+          bloqueia_salvar(Sender);
       end
      else if operacao = 'editar' then
       begin
-         fDataModule.conexaoDB.BeginTrans;
-          try
+         if cb_tipo.ItemIndex = 0 then
+          begin
+          adoquery_operadores.SQL.Text := 'UPDATE OPERADORES SET USUARIO = ' +
+                                            QuotedStr(edt_usuario.Text) +','+
+                                            'NOME = '+ QuotedStr(edt_nome.Text) +','+
+                                            'SENHA = ' +QuotedStr(edt_senha.Text)+
+                                            'TIPO_ACESSO = ' + QuotedStr('0')+
+                                            ' WHERE ID = ' +id;
+          end
+          else if cb_tipo.ItemIndex = 1 then
+          begin
             adoquery_operadores.SQL.Text := 'UPDATE OPERADORES SET USUARIO = ' +
                                             QuotedStr(edt_usuario.Text) +','+
                                             'NOME = '+ QuotedStr(edt_nome.Text) +','+
                                             'SENHA = ' +QuotedStr(edt_senha.Text)+
+                                            'TIPO_ACESSO = ' + QuotedStr('3') +
                                             ' WHERE ID = ' +id;
+          end;
 
+          fDataModule.conexaoDB.BeginTrans;
+          try
           adoquery_operadores.ExecSQL;
            fDataModule.conexaoDB.CommitTrans;
-           bloqueia_campos;
-          bloqueia_salvar(Sender);
           except
           on E : exception do
             ShowMessage('Erro: ' + E.message);
           end;
-
+          bloqueia_campos;
+          bloqueia_salvar(Sender);
          end;
       end;   
   end;

@@ -1,11 +1,9 @@
-object FOperadores: TFOperadores
-  Left = 659
-  Top = 212
-  BorderIcons = [biSystemMenu]
-  BorderStyle = bsSingle
-  Caption = 'Operadores'
-  ClientHeight = 186
-  ClientWidth = 551
+object fInformacoesSocio: TfInformacoesSocio
+  Left = 360
+  Top = 263
+  Width = 873
+  Height = 136
+  Caption = 'fInformacoesSocio'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,102 +14,77 @@ object FOperadores: TFOperadores
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object pnlClient: TPanel
+  object pnlBottom: TPanel
     Left = 0
     Top = 0
-    Width = 551
-    Height = 186
+    Width = 857
+    Height = 97
     Align = alClient
+    Color = cl3DLight
     TabOrder = 0
-    object Usuario: TLabel
-      Left = 16
-      Top = 16
-      Width = 36
-      Height = 13
-      Caption = 'Usuario'
-    end
-    object Senha: TLabel
-      Left = 168
-      Top = 16
-      Width = 31
-      Height = 13
-      Caption = 'Senha'
-    end
-    object Nome: TLabel
-      Left = 16
-      Top = 72
+    object Label1: TLabel
+      Left = 24
+      Top = 3
       Width = 28
       Height = 13
       Caption = 'Nome'
     end
-    object edt_usuario: TEdit
-      Left = 16
-      Top = 32
-      Width = 137
+    object Label2: TLabel
+      Left = 352
+      Top = 3
+      Width = 32
+      Height = 13
+      Caption = 'Renda'
+    end
+    object Label4: TLabel
+      Left = 616
+      Top = 3
+      Width = 84
+      Height = 26
+      Caption = 'Senha de Acesso'#13#10
+    end
+    object Label5: TLabel
+      Left = 480
+      Top = 3
+      Width = 89
+      Height = 26
+      Caption = 'Usuario de Acesso'#13#10
+    end
+    object edt_nome: TEdit
+      Left = 24
+      Top = 19
+      Width = 313
       Height = 21
       Cursor = crIBeam
       MaxLength = 50
       TabOrder = 0
     end
-    object edt_senha: TEdit
-      Left = 168
-      Top = 32
-      Width = 169
+    object edt_renda: TEdit
+      Left = 352
+      Top = 19
+      Width = 121
       Height = 21
       Cursor = crIBeam
-      MaxLength = 50
-      PasswordChar = '*'
+      TabStop = False
+      Color = clInfoBk
+      Enabled = False
+      MaxLength = 8
       TabOrder = 1
     end
-    object edt_nome: TEdit
-      Left = 16
-      Top = 88
-      Width = 385
-      Height = 21
-      Cursor = crIBeam
-      MaxLength = 50
-      TabOrder = 3
-    end
-    object Panel1: TPanel
-      Left = 1
-      Top = 144
-      Width = 549
+    object pnl_botoes: TPanel
+      Left = 208
+      Top = 47
+      Width = 409
       Height = 41
-      Align = alBottom
-      Color = cl3DLight
-      TabOrder = 2
-      object btn_novo: TBitBtn
-        Left = 19
-        Top = 8
-        Width = 75
-        Height = 25
-        Cursor = crHandPoint
-        Caption = 'Novo'
-        TabOrder = 0
-        OnClick = btn_novoClick
-        Glyph.Data = {
-          76010000424D7601000000000000760000002800000020000000100000000100
-          04000000000000010000130B0000130B00001000000000000000000000000000
-          800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF0033333333B333
-          333B33FF33337F3333F73BB3777BB7777BB3377FFFF77FFFF77333B000000000
-          0B3333777777777777333330FFFFFFFF07333337F33333337F333330FFFFFFFF
-          07333337F33333337F333330FFFFFFFF07333337F33333337F333330FFFFFFFF
-          07333FF7F33333337FFFBBB0FFFFFFFF0BB37777F3333333777F3BB0FFFFFFFF
-          0BBB3777F3333FFF77773330FFFF000003333337F333777773333330FFFF0FF0
-          33333337F3337F37F3333330FFFF0F0B33333337F3337F77FF333330FFFF003B
-          B3333337FFFF77377FF333B000000333BB33337777777F3377FF3BB3333BB333
-          3BB33773333773333773B333333B3333333B7333333733333337}
-        NumGlyphs = 2
-      end
+      TabOrder = 5
       object btn_editar: TBitBtn
-        Left = 191
+        Left = 28
         Top = 8
         Width = 75
         Height = 25
         Cursor = crHandPoint
         Caption = 'Editar'
-        TabOrder = 2
+        TabOrder = 0
         OnClick = btn_editarClick
         Glyph.Data = {
           76010000424D7601000000000000760000002800000020000000100000000100
@@ -129,14 +102,13 @@ object FOperadores: TFOperadores
         NumGlyphs = 2
       end
       object btn_cancelar: TBitBtn
-        Left = 278
+        Left = 217
         Top = 8
         Width = 75
         Height = 25
         Cursor = crHandPoint
         Caption = 'Cancelar'
-        TabOrder = 3
-        OnClick = btn_cancelarClick
+        TabOrder = 2
         Glyph.Data = {
           76010000424D7601000000000000760000002800000020000000100000000100
           04000000000000010000130B0000130B00001000000000000000000000000000
@@ -152,42 +124,18 @@ object FOperadores: TFOperadores
           33B33733333773333373B333333B3333333B7333333733333337}
         NumGlyphs = 2
       end
-      object btn_excluir: TBitBtn
-        Left = 372
-        Top = 8
-        Width = 75
-        Height = 25
-        Cursor = crHandPoint
-        Caption = 'Excluir'
-        TabOrder = 4
-        Glyph.Data = {
-          76010000424D7601000000000000760000002800000020000000100000000100
-          04000000000000010000120B0000120B00001000000000000000000000000000
-          800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333000000000
-          3333333777777777F3333330F77777703333333733F3F3F73F33330FF0808077
-          0333337F37F7F7F37F33330FF0807077033333733737F73F73F330FF77808707
-          703337F37F37F37F37F330FF08807807703037F37F37F37F37F700FF08808707
-          700377F37337F37F377330FF778078077033373F73F7F3733733330FF0808077
-          0333337F37F7F7F37F33330FF08070770333337FF7F7F7FF7F33330000000000
-          03333377777777777F33330F888777770333337FFFFFFFFF7F33330000000000
-          033333777777777773333333307770333333333337FFF7F33333333330000033
-          3333333337777733333333333333333333333333333333333333}
-        NumGlyphs = 2
-      end
       object btn_fechar: TBitBtn
-        Left = 459
+        Left = 307
         Top = 8
         Width = 75
         Height = 25
         Cursor = crHandPoint
         Caption = 'Fechar'
-        TabOrder = 5
-        OnClick = btn_fecharClick
+        TabOrder = 3
         Kind = bkCancel
       end
       object btn_salvar: TBitBtn
-        Left = 105
+        Left = 127
         Top = 8
         Width = 75
         Height = 25
@@ -211,11 +159,48 @@ object FOperadores: TFOperadores
         NumGlyphs = 2
       end
     end
+    object RdInativo: TCheckBox
+      Left = 736
+      Top = 15
+      Width = 97
+      Height = 17
+      TabStop = False
+      Caption = 'Socio Inativo'
+      Color = clInfoBk
+      Enabled = False
+      ParentColor = False
+      TabOrder = 4
+    end
+    object edt_senha: TEdit
+      Left = 616
+      Top = 19
+      Width = 105
+      Height = 21
+      Cursor = crIBeam
+      MaxLength = 50
+      PasswordChar = '*'
+      TabOrder = 3
+    end
+    object edt_UserSocio: TEdit
+      Left = 480
+      Top = 19
+      Width = 129
+      Height = 21
+      Cursor = crIBeam
+      MaxLength = 50
+      TabOrder = 2
+    end
   end
-  object adoquery_operadores: TADOQuery
+  object adoquery_aux: TADOQuery
     Connection = fDataModule.conexaoDB
     Parameters = <>
-    Left = 440
-    Top = 16
+    Left = 696
+    Top = 320
+  end
+  object adoquery_socios: TADOQuery
+    Connection = fDataModule.conexaoDB
+    Parameters = <>
+    Left = 760
+    Top = 48
   end
 end

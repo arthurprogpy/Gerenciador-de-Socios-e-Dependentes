@@ -1,11 +1,11 @@
 object fLogin: TfLogin
-  Left = 549
-  Top = 259
+  Left = 523
+  Top = 246
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Login'
-  ClientHeight = 153
-  ClientWidth = 265
+  ClientHeight = 191
+  ClientWidth = 278
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -25,7 +25,7 @@ object fLogin: TfLogin
   end
   object Label2: TLabel
     Left = 128
-    Top = 64
+    Top = 56
     Width = 31
     Height = 13
     Caption = 'Senha'
@@ -174,7 +174,7 @@ object fLogin: TfLogin
   end
   object imgPass: TImage
     Left = 0
-    Top = 72
+    Top = 64
     Width = 33
     Height = 25
     ParentShowHint = False
@@ -316,6 +316,13 @@ object fLogin: TfLogin
       FFFFFFFF}
     ShowHint = False
   end
+  object lbl1: TLabel
+    Left = 80
+    Top = 104
+    Width = 120
+    Height = 26
+    Caption = 'Selecione o tipo de Login'#13#10
+  end
   object edt_usuario: TEdit
     Left = 40
     Top = 24
@@ -327,7 +334,7 @@ object fLogin: TfLogin
   end
   object edt_senha: TEdit
     Left = 40
-    Top = 80
+    Top = 72
     Width = 209
     Height = 21
     Cursor = crIBeam
@@ -337,7 +344,7 @@ object fLogin: TfLogin
   end
   object btn_entrar: TBitBtn
     Left = 176
-    Top = 120
+    Top = 160
     Width = 81
     Height = 25
     Cursor = crHandPoint
@@ -348,7 +355,7 @@ object fLogin: TfLogin
   end
   object btn_sair: TBitBtn
     Left = 8
-    Top = 120
+    Top = 160
     Width = 75
     Height = 25
     Cursor = crHandPoint
@@ -356,6 +363,20 @@ object fLogin: TfLogin
     TabOrder = 3
     OnClick = btn_sairClick
     Kind = bkCancel
+  end
+  object cb_tipoLogin: TComboBox
+    Left = 40
+    Top = 120
+    Width = 209
+    Height = 21
+    Style = csDropDownList
+    ItemHeight = 13
+    ItemIndex = 0
+    TabOrder = 4
+    Text = 'S'#243'cio'
+    Items.Strings = (
+      'S'#243'cio'
+      'Operador')
   end
   object adoquery_login: TADOQuery
     Connection = fDataModule.conexaoDB

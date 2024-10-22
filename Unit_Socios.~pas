@@ -36,6 +36,12 @@
     adoquery_sociosNOME: TStringField;
     adoquery_sociosRENDA: TBCDField;
     adoquery_sociosATIVO: TStringField;
+    Label4: TLabel;
+    Label5: TLabel;
+    edt_senha: TEdit;
+    edt_UserSocio: TEdit;
+    adoquery_sociossenha: TStringField;
+    adoquery_sociosusuario: TStringField;
       procedure limpa_campos;
       procedure bloqueia_campos;
       procedure bloqueia_salvar(Sender : TObject);
@@ -70,7 +76,7 @@
 
   implementation
 
-  uses Unit_Operadores, Unit_dataModule;
+  uses Unit_Operadores, Unit_dataModule, Unit_Login;
 
   {$R *.dfm}
 
@@ -161,7 +167,7 @@
     bloqueia_salvar(Sender);
 
     adoquery_socios.Close;
-    adoquery_socios.SQL.Text := ' SELECT ID, NOME, RENDA, ATIVO FROM SOCIOS';
+    adoquery_socios.SQL.Text := ' SELECT * FROM SOCIOS';
     adoquery_socios.Open;
   end;
 
@@ -185,7 +191,7 @@
     begin
       if operacao = 'novo' then
         begin
-          if (Trim(edt_nome.Text) = '') or (Trim(edt_renda.Text) = '') then
+          if (Trim(edt_nome.Text) = '') or (Trim(edt_renda.Text) = '') or (Trim(edt_senha.text) = '') or (Trim(edt_UserSocio.Text) = '') then
             ShowMessage('Preencha todos os campos')
           else
             if Length(edt_nome.text) <= 4 then
@@ -195,8 +201,12 @@
             adoquery_aux.SQL.Text := 'INSERT INTO SOCIOS VALUES('+
                                               QuotedStr(edt_nome.text)+
                                               ', :ativo,' +
-                                              edt_renda.Text + ')';
+                                              edt_renda.Text +','+ 
+                                              QuotedStr(fLogin.criptografa(edt_senha.Text))+','+
+                                              QuotedStr(edt_UserSocio.Text)+')';
 
+            ShowMessage(adoquery_aux.SQL.Text);
+            
             if RdInativo.Checked = false then // INICIO IF PARA VER SE O RDiNATIVO ESTA MARCADO
               adoquery_aux.Parameters.ParamByName('ativo').Value := 'ATIVO'
             else
@@ -245,7 +255,9 @@
           adoquery_aux.SQL.Text := 'UPDATE SOCIOS SET ' +
                                     ' NOME = ' + QuotedStr(edt_nome.Text)+ ','+
                                     ' ATIVO = ' + atividade + ','+
-                                    ' RENDA =  '+ edt_renda.Text +
+                                    ' RENDA =  '+ edt_renda.Text + ','+
+                                    ' USUARIO = '+ QuotedStr(edt_UserSocio.Text) + ','+
+                                    ' SENHA = ' + QuotedStr(fLogin.criptografa(edt_senha.Text)) +
                                     ' WHERE ID = ' + chave;
 
           fDataModule.conexaoDB.BeginTrans;
@@ -282,10 +294,13 @@
   procedure TFSocios.Grid_sociosCellClick(Column: TColumn);
   var renda: string;
   begin
+
     edt_nome.Text := adoquery_socios.fieldbyname('nome').AsString;
     edt_renda.Text := FormatFloat('0.00', adoquery_socios.fieldbyname('renda').AsCurrency);
     nome := adoquery_socios.fieldbyname('nome').AsString;
     chave := adoquery_socios.Fields.Fields[0].AsString;
+    edt_senha.Text := fLogin.descriptografa(adoquery_socios.fieldbyname('SENHA').AsString);
+    edt_UserSocio.Text := adoquery_socios.fieldbyname('USUARIO').AsString;
 
     if adoquery_socios.fieldbyname('ativo').AsString = 'ATIVO' then
       begin

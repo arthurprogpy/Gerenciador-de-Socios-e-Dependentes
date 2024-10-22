@@ -1,11 +1,11 @@
 object FSocios: TFSocios
-  Left = 408
-  Top = 218
+  Left = 428
+  Top = 252
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Socios'
   ClientHeight = 408
-  ClientWidth = 738
+  ClientWidth = 832
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,7 +21,7 @@ object FSocios: TFSocios
   object pnlTOp: TPanel
     Left = 0
     Top = 0
-    Width = 738
+    Width = 832
     Height = 57
     Align = alTop
     Color = cl3DLight
@@ -34,7 +34,7 @@ object FSocios: TFSocios
       Caption = 'Pesquisar Socio'
     end
     object btn_pesquisa: TBitBtn
-      Left = 536
+      Left = 592
       Top = 16
       Width = 75
       Height = 25
@@ -60,13 +60,13 @@ object FSocios: TFSocios
     object edt_pesquisa: TMaskEdit
       Left = 104
       Top = 24
-      Width = 425
+      Width = 473
       Height = 21
       Cursor = crIBeam
       TabOrder = 1
     end
     object btn_limmpar: TBitBtn
-      Left = 616
+      Left = 672
       Top = 16
       Width = 75
       Height = 25
@@ -105,7 +105,7 @@ object FSocios: TFSocios
   object pnlBottom: TPanel
     Left = 0
     Top = 312
-    Width = 738
+    Width = 832
     Height = 96
     Align = alBottom
     Color = cl3DLight
@@ -118,11 +118,25 @@ object FSocios: TFSocios
       Caption = 'Nome'
     end
     object Label2: TLabel
-      Left = 376
+      Left = 352
       Top = 3
       Width = 32
       Height = 13
       Caption = 'Renda'
+    end
+    object Label4: TLabel
+      Left = 624
+      Top = 3
+      Width = 84
+      Height = 26
+      Caption = 'Senha de Acesso'#13#10
+    end
+    object Label5: TLabel
+      Left = 488
+      Top = 3
+      Width = 89
+      Height = 26
+      Caption = 'Usuario de Acesso'#13#10
     end
     object edt_nome: TEdit
       Left = 24
@@ -134,22 +148,22 @@ object FSocios: TFSocios
       TabOrder = 0
     end
     object edt_renda: TEdit
-      Left = 376
+      Left = 352
       Top = 19
       Width = 121
       Height = 21
       Cursor = crIBeam
-      MaxLength = 8
+      MaxLength = 7
       TabOrder = 1
       OnChange = edt_rendaChange
       OnKeyPress = edt_rendaKeyPress
     end
     object pnl_botoes: TPanel
-      Left = 24
+      Left = 48
       Top = 47
       Width = 681
       Height = 41
-      TabOrder = 2
+      TabOrder = 5
       object btn_novo: TBitBtn
         Left = 11
         Top = 8
@@ -283,25 +297,44 @@ object FSocios: TFSocios
       end
     end
     object RdInativo: TCheckBox
-      Left = 536
-      Top = 15
+      Left = 736
+      Top = 7
       Width = 97
       Height = 17
       Caption = 'Socio Inativo'
+      TabOrder = 4
+    end
+    object edt_senha: TEdit
+      Left = 624
+      Top = 19
+      Width = 105
+      Height = 21
+      Cursor = crIBeam
+      MaxLength = 50
+      PasswordChar = '*'
       TabOrder = 3
+    end
+    object edt_UserSocio: TEdit
+      Left = 488
+      Top = 19
+      Width = 129
+      Height = 21
+      Cursor = crIBeam
+      MaxLength = 50
+      TabOrder = 2
     end
   end
   object pnlClient: TPanel
     Left = 0
     Top = 57
-    Width = 738
+    Width = 832
     Height = 255
     Align = alClient
     TabOrder = 0
     object gridSocios: TDBGrid
       Left = 1
       Top = 1
-      Width = 736
+      Width = 830
       Height = 253
       Align = alClient
       DataSource = DsSocios
@@ -320,9 +353,7 @@ object FSocios: TFSocios
     Connection = fDataModule.conexaoDB
     CursorType = ctStatic
     Parameters = <>
-    SQL.Strings = (
-      '')
-    Left = 696
+    Left = 760
     Top = 16
     object adoquery_sociosID: TAutoIncField
       FieldName = 'ID'
@@ -341,16 +372,24 @@ object FSocios: TFSocios
       FieldName = 'ATIVO'
       Size = 7
     end
+    object adoquery_sociossenha: TStringField
+      FieldName = 'senha'
+      Size = 30
+    end
+    object adoquery_sociosusuario: TStringField
+      FieldName = 'usuario'
+      Size = 50
+    end
   end
   object DsSocios: TDataSource
     DataSet = adoquery_socios
-    Left = 672
+    Left = 792
     Top = 16
   end
   object adoquery_aux: TADOQuery
     Connection = fDataModule.conexaoDB
     Parameters = <>
-    Left = 696
-    Top = 320
+    Left = 744
+    Top = 368
   end
 end

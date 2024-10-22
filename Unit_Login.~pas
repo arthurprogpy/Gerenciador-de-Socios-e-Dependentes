@@ -17,26 +17,29 @@ type
     adoquery_login: TADOQuery;
     imgUser: TImage;
     imgPass: TImage;
+    cb_tipoLogin: TComboBox;
+    lbl1: TLabel;
     procedure btn_sairClick(Sender: TObject);
     procedure btn_entrarClick(Sender: TObject);
     function descriptografa (texto :String) :String;
     function criptografa(texto: String) : String;
     procedure BitBtn1Click(Sender: TObject);
-    function validacao(usuario, senha: string) :boolean;
+    function validacao(tipo: integer; usuario, senha: string) :boolean;
     function autenticacao :boolean;
   private
     { Private declarations }
     senha : String;
-  public
 
+  public
+    tipo_acesso: String;
   end;
 
 var
   fLogin: TfLogin;
-  usuario, ID: String;
+  usuario, ID, renda, ativo, senha, nome: String;
 implementation
 
-uses Unit_dataModule, Unit_Menu;
+uses Unit_dataModule, Unit_Menu, Unit_MenuSocios;
 
 {$R *.dfm}
 
@@ -47,13 +50,33 @@ end;
 
 procedure TfLogin.btn_entrarClick(Sender: TObject);
 begin
-  if (trim(edt_usuario.Text) = '') or (trim(edt_senha.Text) = '') then
+  if (trim(edt_usuario.Text) = '') or (trim(edt_senha.Text) = '')  then
     begin
       ShowMessage('Preencha todos os campos !');
     end
   else
     begin
-      validacao(edt_usuario.Text, edt_senha.Text);
+      if validacao(cb_tipoLogin.ItemIndex, edt_usuario.Text, edt_senha.Text) = True then
+        begin
+          if tipo_acesso = 'OPERADOR' then
+            begin
+              if fMenu = nil then
+                begin
+                  Application.CreateForm(TfMenu, fMenu);
+                  fMenu.Show;
+                  fLogin.Hide;
+                end;
+            end
+          else if tipo_acesso = 'SOCIO' then
+            begin
+              if fMenuSocios = nil then
+                begin
+                  Application.CreateForm(TfMenuSocios, fMenuSocios);
+                end;
+              fMenuSocios.Show;
+              fLogin.Hide;
+            end;
+        end;
      end;
 end;
 function TfLogin.descriptografa(texto: String): String;
@@ -91,38 +114,71 @@ begin
   edt_senha.Text := criptografa(edt_usuario.Text);
 end;
 
-function TfLogin.validacao(usuario, senha: string): boolean;
+function TfLogin.validacao(tipo : Integer;usuario, senha: string): boolean;
 begin
-  adoquery_login.SQL.Text := 'SELECT * FROM OPERADORES WHERE USUARIO = ' +
+  if tipo = 0 then
+    begin
+      adoquery_login.SQL.Text := 'SELECT * FROM SOCIOS WHERE USUARIO = ' +
                               QuotedStr(edt_usuario.Text);
 
-  adoquery_login.Open;
+      adoquery_login.Open;
 
-  if adoquery_login.IsEmpty then
-    begin
-      ShowMessage('Nenhum Usuario Cadastrado !');
-      Result := false;
-    end
-  else
-    begin
-      senha := descriptografa(adoquery_login.fieldbyname('senha').AsString);
-        if edt_senha.Text <> senha then
-          begin
-            ShowMessage('Senha Incorreta');
-            Result := false;
-          end
-        else
-          begin
-            usuario := adoquery_login.fieldbyname('usuario').AsString;
-            id := adoquery_login.fieldbyname('ID').AsString;
-            if fMenu = nil  then
+      if adoquery_login.IsEmpty then
+        begin
+          ShowMessage('Nenhum Usuario Cadastrado !');
+          Result := false;
+        end
+      else
+        begin
+          senha := descriptografa(adoquery_login.fieldbyname('senha').AsString);
+            if edt_senha.Text <> senha then
               begin
-                Application.CreateForm(TfMenu, fMenu);
+                ShowMessage('Senha Incorreta');
+                Result := false;
+              end
+            else
+              begin
+                id := adoquery_login.fieldbyname('ID').AsString;
+                nome := adoquery_login.fieldbyname('NOME').AsString;
+                ativo := adoquery_login.fieldbyname('ATIVO').AsString;
+                renda := FormatFloat(',0.00', adoquery_login.fieldbyname('renda').AsCurrency)
+                usuario := adoquery_login.fieldbyname('USUARIO').AsString;
+                senha := descriptografa(adoquery_login.fieldbyname('SENHA').AsString);
+
+                tipo_acesso := 'SOCIO';
+                Result := true;
               end;
-            fMenu.Show;
-            fLogin.Hide;
-            Result := true;
-          end;
+        end;
+    end
+  else if tipo = 1 then
+    begin
+      adoquery_login.SQL.Text := 'SELECT * FROM OPERADORES WHERE USUARIO = ' +
+                              QuotedStr(edt_usuario.Text);
+
+      adoquery_login.Open;
+
+      if adoquery_login.IsEmpty then
+        begin
+          ShowMessage('Nenhum Usuario Cadastrado !');
+          Result := false;
+        end
+      else
+        begin
+          senha := descriptografa(adoquery_login.fieldbyname('senha').AsString);
+            if edt_senha.Text <> senha then
+              begin
+                ShowMessage('Senha Incorreta');
+                Result := false;
+              end
+            else
+              begin
+                usuario := adoquery_login.fieldbyname('usuario').AsString;
+                id := adoquery_login.fieldbyname('ID').AsString;
+                tipo_acesso := 'OPERADOR';
+
+                Result := true;
+              end;
+        end;
     end;
 end;
 

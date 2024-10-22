@@ -1,6 +1,6 @@
 object fDependentes: TfDependentes
-  Left = 419
-  Top = 162
+  Left = 430
+  Top = 218
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Dependentes'
@@ -132,7 +132,7 @@ object fDependentes: TfDependentes
         Height = 25
         Cursor = crHandPoint
         Caption = 'Editar'
-        TabOrder = 1
+        TabOrder = 2
         OnClick = btn_editarClick
         Glyph.Data = {
           76010000424D7601000000000000760000002800000020000000100000000100
@@ -156,7 +156,7 @@ object fDependentes: TfDependentes
         Height = 25
         Cursor = crHandPoint
         Caption = 'Cancelar'
-        TabOrder = 2
+        TabOrder = 3
         Glyph.Data = {
           76010000424D7601000000000000760000002800000020000000100000000100
           04000000000000010000130B0000130B00001000000000000000000000000000
@@ -179,7 +179,7 @@ object fDependentes: TfDependentes
         Height = 25
         Cursor = crHandPoint
         Caption = 'Excluir'
-        TabOrder = 3
+        TabOrder = 4
         OnClick = btn_excluirClick
         Glyph.Data = {
           76010000424D7601000000000000760000002800000020000000100000000100
@@ -203,7 +203,7 @@ object fDependentes: TfDependentes
         Height = 25
         Cursor = crHandPoint
         Caption = 'Fechar'
-        TabOrder = 4
+        TabOrder = 5
         Kind = bkCancel
       end
       object btn_salvar: TBitBtn
@@ -213,7 +213,7 @@ object fDependentes: TfDependentes
         Height = 25
         Cursor = crHandPoint
         Caption = 'Salvar'
-        TabOrder = 5
+        TabOrder = 1
         OnClick = btn_salvarClick
         Glyph.Data = {
           76010000424D7601000000000000760000002800000020000000100000000100
@@ -283,7 +283,7 @@ object fDependentes: TfDependentes
       Height = 25
       Cursor = crHandPoint
       Caption = 'Limpar'
-      TabOrder = 2
+      TabOrder = 3
       OnClick = btn_LimparClick
       Glyph.Data = {
         76010000424D7601000000000000760000002800000020000000100000000100
@@ -307,7 +307,7 @@ object fDependentes: TfDependentes
       Height = 25
       Cursor = crHandPoint
       Caption = 'Pesquisar'
-      TabOrder = 3
+      TabOrder = 2
       OnClick = btn_pesqusiarClick
       Glyph.Data = {
         76010000424D7601000000000000760000002800000020000000100000000100
@@ -353,6 +353,7 @@ object fDependentes: TfDependentes
     Connection = fDataModule.conexaoDB
     Parameters = <>
     Left = 616
+    Top = 65528
   end
   object adoquery_dependentes: TADOQuery
     Connection = fDataModule.conexaoDB
