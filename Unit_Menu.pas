@@ -17,7 +17,6 @@ type
     tmr1: TTimer;
     pnlTop: TPanel;
     statBarMenu: TStatusBar;
-    imglogo: TImage;
     pnlClient: TPanel;
     lbl: TLabel;
     procedure btn_fecharClick(Sender: TObject);

@@ -146,7 +146,7 @@ object fMenu: TfMenu
     object btn_fechar: TBitBtn
       Left = 471
       Top = 8
-      Width = 75
+      Width = 90
       Height = 65
       Cursor = crHandPoint
       Caption = 'Fechar'
